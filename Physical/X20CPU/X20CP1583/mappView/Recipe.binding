@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BindingsSet xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Recipe_binding">
+	<Bindings>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.No" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecErrorNo" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.Text" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecErrorText" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.DAT.Status" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
+		</Binding>		
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Temperature1" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp1" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Temperature2" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp2" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.MotorSpeed" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecSpeed" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Position" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPosition" attribute="node" />
+		</Binding>	
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeDirectory" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPath" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeID" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecID" attribute="value" />
+		</Binding>
+		<Binding mode="oneWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.Initialized" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="StatusInitialized" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecDelete" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecRename" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecLoad" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecSave" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecFilter" attribute="enable" />
+		</Binding>
+	
+		<!-- Multiple bindings from mappView to PLC />-->
+		<Binding mode="oneWayToSource">
+			<Source xsi:type="listElement">
+				<Selector xsi:type="session" refId="::SYSTEM:clientInfo.slotId" attribute="value" />
+				<be:List xsi:type="be:opcUa" attribute="value">
+					<bt:Element index="0" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeFilter" />
+					<bt:Element index="1" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeFilter" />
+					<bt:Element index="2" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeFilter" />
+				</be:List>
+			</Source>
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecFilter" attribute="value" />
+		</Binding>
+		
+		<!-- Multiple bindings from vis PLC to mappView />-->	
+		<Binding mode="oneWay">
+			<Source xsi:type="listElement">
+				<Selector xsi:type="session" refId="::SYSTEM:clientInfo.slotId" attribute="value" />
+				<be:List xsi:type="be:opcUa" attribute="value">
+					<bt:Element index="0" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeNames" />
+					<bt:Element index="1" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeNames" />
+					<bt:Element index="2" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeNames" />
+				</be:List>
+			</Source>
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="lstRecNames" attribute="dataProvider" />
+		</Binding>
+
+		<Binding mode="oneWay">
+			<Source xsi:type="listElement">
+				<Selector xsi:type="session" refId="::SYSTEM:clientInfo.slotId" attribute="value" />
+				<be:List xsi:type="be:opcUa" attribute="value">
+					<bt:Element index="0" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeNum" />
+					<bt:Element index="1" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeNum" />
+					<bt:Element index="2" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeNum" />
+				</be:List>
+			</Source>
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecItems" attribute="value" />
+		</Binding>
+	</Bindings>
+</BindingsSet>
