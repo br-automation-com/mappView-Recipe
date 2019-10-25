@@ -3,12 +3,14 @@
 //******************************************************************************************************
 FUNCTION FindRecName
 	// Check if recipe name exists
-	FOR idx:=0 TO RECIPE.DAT.RecipeNum - 1 DO
-		IF(RECIPE.DAT.RecipeNames[idx] = RecipeName) THEN
-			FindRecName := idx;
-			RETURN;
-		END_IF
-	END_FOR;
+	IF(RECIPE.DAT.RecipeNum > 0) THEN
+		FOR idx:=0 TO RECIPE.DAT.RecipeNum - 1 DO
+			IF(RECIPE.DAT.RecipeNames[idx] = RecipeName) THEN
+				FindRecName := idx;
+				RETURN;
+			END_IF
+		END_FOR;
+	END_IF
 	FindRecName := REC_DOES_NOT_EXIST;
 END_FUNCTION
 
