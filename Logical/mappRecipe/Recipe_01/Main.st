@@ -138,7 +138,7 @@ PROGRAM _CYCLIC
 				MpRecipeRegPar_1.Enable := TRUE;;				
 				rec_state := REC_GEN_FILE_NAME;
 				// ---------------------------------------------------------------------------------------- 
-				// Command load recipe
+				// Command save recipe
 			ELSIF (RECIPE.CMD.Save = TRUE AND (RECIPE.PAR.RecipeName <> "" OR RECIPE.PAR.RecipeNameNew <> "")) THEN
 				// Show current state																		
 				animation := WorkingStatus(ADR(RECIPE), ADR("saving recipe..."), animation);

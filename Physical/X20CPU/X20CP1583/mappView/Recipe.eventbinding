@@ -212,32 +212,42 @@
 				</ReadTarget>
 			</Operand>
 			<EventHandler>
-				<Sequence>
-					<!-- Set slot ID />-->
-					<Step order="1">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.VisuSlotID" >
-								<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="=slotId" />
-							</Target>
-						</Action>
-					</Step>
-					<!-- Set recipe name />-->
-					<Step order="2">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
-								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
-							</Target>
-						</Action>
-					</Step>
-					<!-- Set command />-->
-					<Step order="3">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.Save" >
-								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
-							</Target>
-						</Action>
-					</Step>
-				</Sequence>				
+				<Action>					
+					<!-- Show message box before saving />-->
+					<Target xsi:type="clientSystem.Action">
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Overwrite recipe?" header="Overwrite recipe" icon="Question"  />
+					</Target>
+					<Result>
+						<ResultHandler condition="result = 1">
+							<Sequence>
+								<!-- Set slot ID />-->
+								<Step order="1">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.VisuSlotID" >
+											<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="=slotId" />
+										</Target>
+									</Action>
+								</Step>
+								<!-- Set recipe name />-->
+								<Step order="2">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
+											<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+										</Target>
+									</Action>
+								</Step>
+								<!-- Set command />-->
+								<Step order="3">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.Save" >
+											<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
+										</Target>
+									</Action>
+								</Step>
+							</Sequence>		
+						</ResultHandler>
+					</Result>
+				</Action>		
 			</EventHandler>
 		</EventBinding>
 		
@@ -322,32 +332,42 @@
 				</ReadTarget>
 			</Operand>
 			<EventHandler condition="NOT DeleteCommand">
-				<Sequence>
-					<!-- Set slot ID />-->
-					<Step order="1">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.VisuSlotID" >
-								<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="=slotId" />
-							</Target>
-						</Action>
-					</Step>
-					<!-- Set recipe name />-->
-					<Step order="2">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
-								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
-							</Target>
-						</Action>
-					</Step>
-					<!-- Set command />-->
-					<Step order="3">
-						<Action>
-							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.Delete" >
-								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
-							</Target>
-						</Action>
-					</Step>
-				</Sequence>				
+				<Action>
+					<!-- Show message box before saving />-->					
+					<Target xsi:type="clientSystem.Action">
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Delete recipe?" header="Delete recipe" icon="Question"  />
+					</Target>
+					<Result>
+						<ResultHandler condition="result = 1">
+							<Sequence>
+								<!-- Set slot ID />-->
+								<Step order="1">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.VisuSlotID" >
+											<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="=slotId" />
+										</Target>
+									</Action>
+								</Step>
+								<!-- Set recipe name />-->
+								<Step order="2">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
+											<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+										</Target>
+									</Action>
+								</Step>
+								<!-- Set command />-->
+								<Step order="3">
+									<Action>
+										<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.Delete" >
+											<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
+										</Target>
+									</Action>
+								</Step>
+							</Sequence>
+						</ResultHandler>
+					</Result>
+				</Action>				
 			</EventHandler>
 		</EventBinding>
 		
