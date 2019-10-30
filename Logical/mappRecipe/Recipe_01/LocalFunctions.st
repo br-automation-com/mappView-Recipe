@@ -148,10 +148,10 @@ END_FUNCTION
 //******************************************************************************************************
 // Is second string in first string																		
 //******************************************************************************************************
-FUNCTION IsInstrW
+FUNCTION IsInstrW	
 	IF (brwcslen(string1) >= brwcslen(string2)) THEN
 		FOR idx:=0 TO brwcslen(string1) - brwcslen(string2) DO
-			IF (brwcsncmp(string1 + idx, string2, brwcslen(string2)) = 0) THEN
+			IF (brwcsncmp(string1 + (2*idx), string2, brwcslen(string2)) = 0) THEN
 				IsInstrW := TRUE;
 				EXIT;
 			END_IF
