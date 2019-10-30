@@ -215,7 +215,7 @@
 				<Action>					
 					<!-- Show message box before saving />-->
 					<Target xsi:type="clientSystem.Action">
-						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Overwrite recipe?" header="Overwrite recipe" icon="Question"  />
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Overwrite recipe?" header="=lstRecNames" icon="Question"  />
 					</Target>
 					<Result>
 						<ResultHandler condition="result = 1">
@@ -335,7 +335,7 @@
 				<Action>
 					<!-- Show message box before saving />-->					
 					<Target xsi:type="clientSystem.Action">
-						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Delete recipe?" header="Delete recipe" icon="Question"  />
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Delete recipe?" header="=lstRecNames" icon="Question"  />
 					</Target>
 					<Result>
 						<ResultHandler condition="result = 1">
