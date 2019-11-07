@@ -5,7 +5,7 @@
     <Connector Name="IF2">
       <Parameter ID="ActivateDevice" Value="1" />
     </Connector>
-    <Parameter ID="ConfigurationID" Value="Tmp_Explorer_V1_Config1" />
+    <Parameter ID="ConfigurationID" Value="Tmp_Recipe" />
     <Parameter ID="UserPartitionSize" Value="200" />
     <Parameter ID="VolatileGlobalPvSize" Value="300000" />
     <Parameter ID="Cyclic8Stack" Value="20000" />
