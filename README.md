@@ -23,5 +23,8 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.1
-First public release
+#### Version 0.2
+- Added message box before saving or deleting a recipe 
+- Fixed filter compare too short 
+- Added exit function 
+- Code cleanup 
