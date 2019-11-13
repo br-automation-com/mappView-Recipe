@@ -65,5 +65,4 @@ VAR CONSTANT
 	ERR_REC_NOT_INITIALIZED : DINT := 50130; (*Recipemanagement is not initialized*)
 	ERR_REC_MAX_NUM : DINT := 50200; (*Maximum number of recipes reached*)
 	ERR_REC_TASK_NAME : DINT := 50300; (*Task name is incorrect*)
-	ERR_REC_GLOBAL_VAR : DINT := 50231; (*Maximum number of recipes reached*)
 END_VAR

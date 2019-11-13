@@ -1,3 +1,7 @@
+Version 0.3
+- Added categories to mapp function blocks to seperate recipe data
+- Removed obsolete constants
+
 Version 0.2
 - Added message box before saving or deleting a recipe
 - Fixed filter compare too short

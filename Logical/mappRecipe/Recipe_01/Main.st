@@ -11,7 +11,6 @@
 //  50130  Recipe management is not initialized
 //  50200  Maximum number of recipes reached
 //  50300  Task name is incorrect
-//  50310  Global recipe structure is incorrect
 //******************************************************************************************************
 
 //******************************************************************************************************
@@ -213,6 +212,7 @@ PROGRAM _CYCLIC
 			MpRecipeRegPar_0.Enable := TRUE;
 			MpRecipeRegPar_0.MpLink := ADR(RECIPE.PAR.MpLink);
 			MpRecipeRegPar_0.PVName := ADR(tmpStr1);
+			MpRecipeRegPar_0.Category := ADR(this);
 										
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
@@ -228,6 +228,7 @@ PROGRAM _CYCLIC
 		REC_REG_VAR:
 			MpRecipeRegPar_1.MpLink := ADR(RECIPE.PAR.MpLink);
 			MpRecipeRegPar_1.PVName := ADR(RECIPE.PAR.RecipeVariable);	
+			MpRecipeRegPar_1.Category := ADR(this);
 										
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
@@ -472,6 +473,7 @@ PROGRAM _CYCLIC
 				MpRecipeCsv_0.MpLink := ADR(RECIPE.PAR.MpLink);
 				MpRecipeCsv_0.DeviceName := ADR(RECIPE.PAR.DeviceName);
 				MpRecipeCsv_0.FileName := ADR(RecipeFullFileName);
+				MpRecipeCsv_0.Category := ADR(this);
 				MpRecipeCsv_0.Save := RECIPE.CMD.Save OR RECIPE.CMD.New OR RECIPE.CMD.Rename;
 				MpRecipeCsv_0.Load := RECIPE.CMD.Load OR RECIPE.CMD.Init;
 
@@ -483,6 +485,7 @@ PROGRAM _CYCLIC
 				MpRecipeXml_0.MpLink := ADR(RECIPE.PAR.MpLink);
 				MpRecipeXml_0.DeviceName := ADR(RECIPE.PAR.DeviceName);
 				MpRecipeXml_0.FileName := ADR(RecipeFullFileName);
+				MpRecipeXml_0.Category := ADR(this);
 				MpRecipeXml_0.Save := RECIPE.CMD.Save OR RECIPE.CMD.New OR RECIPE.CMD.Rename;
 				MpRecipeXml_0.Load := RECIPE.CMD.Load OR RECIPE.CMD.Init;
 
@@ -547,6 +550,11 @@ PROGRAM _CYCLIC
 				// Error		
 			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_LOAD_WITH_WARN) THEN
 				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, "warning recipe read/write/new, check PLC logbook for details", rec_state);
+			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_NO_PV_FOUND) THEN
+				tmpWStr1 := "error recipe file contains no data ";
+				brwcsconv(ADR(tmpWStr2), ADR(RecipeFullFileName), brwU8toUC);
+				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
+				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, tmpWStr1, rec_state);
 			ELSIF (MpRecipeError OR MpRecipeStatusID <> 0) THEN
 				tmpWStr1 := "error recipe read/write/new ";
 				brwcscat(ADR(tmpWStr1), ADR(RecipeName));
