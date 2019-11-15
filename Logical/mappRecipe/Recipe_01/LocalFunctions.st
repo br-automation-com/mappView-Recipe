@@ -20,7 +20,7 @@ END_FUNCTION
 FUNCTION WString2DataProvider
 	brwcscpy(TargetString, ADR("{$"value$":$""));
 	brwcscat(TargetString, SourceString);
-	brwcscat(TargetString, ADR("$",$"text$":$""));	
+	brwcscat(TargetString, ADR("$",$"text$":$""));
 	brwcscat(TargetString, SourceString);
 	brwcscat(TargetString, ADR("$"}"));
 
@@ -28,7 +28,7 @@ FUNCTION WString2DataProvider
 END_FUNCTION
 
 //******************************************************************************************************
-// Create error																						
+// Create error
 //******************************************************************************************************
 FUNCTION CreateError
 	RECIPE.ERR.No := No;
@@ -38,7 +38,7 @@ FUNCTION CreateError
 END_FUNCTION
 
 //******************************************************************************************************
-// Create status meesage																						
+// Create status meesage
 //******************************************************************************************************
 FUNCTION CreateMessage
 	brwcscpy(ADR(tmpWStr1), Text);
@@ -53,15 +53,15 @@ FUNCTION CreateMessage
 END_FUNCTION
 
 //******************************************************************************************************
-// Working status																						
+// Working status
 //******************************************************************************************************
 FUNCTION WorkingStatus
 	animation := animation+1;
-	
+
 	IF (animation = 80) THEN
 		animation := 0;
 	END_IF
-	
+
 	brsmemset(ADR(RECIPE.DAT.Status), 0, SIZEOF(RECIPE.DAT.Status));
 	brwcscpy(ADR(RECIPE.DAT.Status), str);
 	CASE(animation) OF
@@ -74,7 +74,7 @@ FUNCTION WorkingStatus
 END_FUNCTION
 
 //******************************************************************************************************
-// Fill new folder or directory name																	
+// Remove recipe name from list
 //******************************************************************************************************
 FUNCTION RemoveRecName
 	// Remove name from recipe list
@@ -89,50 +89,50 @@ FUNCTION RemoveRecName
 END_FUNCTION
 
 //******************************************************************************************************
-// Fill new folder or directory name																	
+// Insert new recipe name																	
 //******************************************************************************************************
 FUNCTION InsertRecName
-	// Set up start values for iteration																
-	IF (RECIPE.DAT.RecipeNum <> 0) THEN 
+	// Set up start values for iteration
+	IF (RECIPE.DAT.RecipeNum <> 0) THEN
 		idy := RECIPE.DAT.RecipeNum - 1;
 	END_IF
 	idx := idy;
-	
-	// Start iteration	search																			
+
+	// Start iteration	search
 	WHILE (idy > 1) DO
-		// Check current entry																			
+		// Check current entry
 		lSort := brwcscmp(ADR(new_name), ADR(RECIPE.DAT.RecipeNames[idy]));
-		// Solve new search range																		
+		// Solve new search range
 		IF (idy MOD 2 = 0) THEN
 			idy := idy / 2;
-		ELSE				
+		ELSE
 			idy := idy / 2 + 1;
 		END_IF
-		// New range is lower or higher than current													
+		// New range is lower or higher than current
 		IF (lSort > 0) THEN
 			idx := idx + idy;
 			IF (idx > UINT_TO_INT(RECIPE.DAT.RecipeNum)) THEN
-				idx := RECIPE.DAT.RecipeNum;  
+				idx := RECIPE.DAT.RecipeNum;
 			END_IF
 		ELSE
 			idx := idx - idy;
 			IF (idx < 1) THEN
 				idx := 1;
 			END_IF
-		END_IF		
+		END_IF
 	END_WHILE;
-			
-	// New entry is this, next or previous 																
+
+	// New entry is this, next or previous
 	lSort := brwcscmp(ADR(new_name), ADR(RECIPE.DAT.RecipeNames[idx]));
-	IF (lSort > 0 AND idx <> UINT_TO_INT(RECIPE.DAT.RecipeNum)) THEN 
+	IF (lSort > 0 AND idx <> UINT_TO_INT(RECIPE.DAT.RecipeNum)) THEN
 		idx := idx +1;
 	ELSIF (idx > 0) THEN
 		lSort := brwcscmp(ADR(new_name), ADR(RECIPE.DAT.RecipeNames[idx-1]));
-		IF (lSort < 0) THEN 
+		IF (lSort < 0) THEN
 			idx := idx - 1;
 		END_IF
 	END_IF
-	
+
 	// Move all data entrys backwards and fill in new entry
 	IF(idx < REC_MAX_NUM) THEN
 		brsmemmove(ADR(RECIPE.DAT.RecipeNames[idx+1]),ADR(RECIPE.DAT.RecipeNames[idx]), (RECIPE.DAT.RecipeNum - idx) * SIZEOF(RECIPE.DAT.RecipeNames[1]));
@@ -140,15 +140,15 @@ FUNCTION InsertRecName
 	END_IF
 	brwcscpy(ADR(RECIPE.DAT.RecipeNames[idx]), ADR(new_name));
 	brsstrcpy(ADR(RECIPE.DAT.RecipeIDs[idx]), ADR(new_id));
-	
+
 	RECIPE.DAT.RecipeNum := RECIPE.DAT.RecipeNum + 1;
 	InsertRecName := idx;
 END_FUNCTION
 
 //******************************************************************************************************
-// Is second string in first string																		
+// Is second string in first string
 //******************************************************************************************************
-FUNCTION IsInstrW	
+FUNCTION IsInstrW
 	IF (brwcslen(string1) >= brwcslen(string2)) THEN
 		FOR idx:=0 TO brwcslen(string1) - brwcslen(string2) DO
 			IF (brwcsncmp(string1 + (2*idx), string2, brwcslen(string2)) = 0) THEN
@@ -158,4 +158,3 @@ FUNCTION IsInstrW
 		END_FOR;
 	END_IF
 END_FUNCTION
-
