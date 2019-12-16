@@ -36,6 +36,7 @@ VAR
 	MpRecipeDone : BOOL; (*Generic status done*)
 	MpRecipeError : BOOL; (*Genereic status error*)
 	MpRecipeStatusID : DINT; (*Generic error details*)
+	DoubleClickRecipeName : ARRAY[0..REC_MAX_CLIENTS_ID] OF TON_10ms;
 END_VAR
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 (*Local function calls*)

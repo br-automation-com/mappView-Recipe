@@ -23,8 +23,7 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.2
-- Added message box before saving or deleting a recipe 
-- Fixed filter compare too short 
-- Added exit function 
-- Code cleanup 
+#### Version 0.3
+- Added categories to mapp function blocks to seperate recipe data
+- Added function to view files by double click or command
+- Removed obsolete constants

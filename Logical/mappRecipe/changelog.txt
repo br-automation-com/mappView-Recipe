@@ -1,5 +1,6 @@
 Version 0.3
 - Added categories to mapp function blocks to seperate recipe data
+- Added function to view files by double click or command
 - Removed obsolete constants
 
 Version 0.2

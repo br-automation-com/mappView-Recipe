@@ -16,6 +16,7 @@ TYPE
 		REC_LOAD_SAVE,
 		REC_DELETE,
 		REC_RENAME,
+		REC_VIEW,
 		REC_ERROR
 		);
 	recTYPE : 
@@ -39,6 +40,7 @@ TYPE
 		New : BOOL;
 		Load : BOOL;
 		Save : BOOL;
+		View : BOOL;
 		Rename : BOOL;
 		Delete : BOOL; (* Delete selected file *)
 		ErrorReset : BOOL;
@@ -66,6 +68,9 @@ TYPE
 		RecipeNum : UINT; (*Number of recipes*)
 		RecipeFilter : WSTRING[REC_NAME_LENGTH]; (*Filter for recipe name	*)
 		RecipeSelect : WSTRING[REC_NAME_LENGTH]; (*Select new or renamed recipe in list box*)
+		RecipeDoubleClick : USINT; (*TrackDoubleClick event*)
+		ViewFilePath : STRING[REC_VIS_LENGTH]; (*Full path for viewing file*)
+		ViewFile : BOOL; (*Show message box on error*)
 		ShowMessageBoxError : BOOL; (*Show message box on error*)
 	END_STRUCT;
 	recMAIN : 	STRUCT  (*Recipe managment main structure*)

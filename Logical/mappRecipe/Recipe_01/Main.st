@@ -67,6 +67,30 @@ PROGRAM _CYCLIC
 				RecipeNumOld[VisuSlotID] := RECIPE.DAT.RecipeNum;
 				RECIPE.VIS[VisuSlotID].RecipeNum := idy;
 			END_IF
+			
+			// ------------------------------------------------------------------------------------------------
+			// Handle double click for file open
+			IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 0) THEN
+				DoubleClickRecipeName[VisuSlotID].PT := 50;
+				DoubleClickRecipeName[VisuSlotID].IN := 1;
+				DoubleClickRecipeName[VisuSlotID]();
+				// Open selected file
+				IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 1) THEN
+					DoubleClickRecipeName[VisuSlotID].IN := 0;
+					DoubleClickRecipeName[VisuSlotID]();
+					RECIPE.VIS[VisuSlotID].RecipeDoubleClick := 0;
+					RECIPE.PAR.VisuSlotID := VisuSlotID;
+					RECIPE.CMD.View := TRUE;
+				END_IF
+			END_IF
+			IF(DoubleClickRecipeName[VisuSlotID].Q) THEN
+				DoubleClickRecipeName[VisuSlotID].IN := 0;
+				DoubleClickRecipeName[VisuSlotID]();
+				IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 0) THEN
+					RECIPE.VIS[VisuSlotID].RecipeDoubleClick := RECIPE.VIS[VisuSlotID].RecipeDoubleClick - 1;
+				END_IF
+			END_IF
+			
 			// Cylce through the client web seesions
 			VisuSlotID := VisuSlotID + 1;
 			IF(VisuSlotID > REC_MAX_CLIENTS_ID) THEN
@@ -147,6 +171,12 @@ PROGRAM _CYCLIC
 				// Turn on variable saving, copy recipe name to local variable
 				MpRecipeRegPar_1.Enable := TRUE;;
 				rec_state := REC_GEN_FILE_NAME;
+				// ---------------------------------------------------------------------------------------- 
+				// Command delete recipe
+			ELSIF (RECIPE.CMD.View = TRUE AND RECIPE.PAR.RecipeName <> "") THEN
+				// Show current state, copy recipe name to local variable																		
+				animation := WorkingStatus(ADR(RECIPE), ADR("deleting recipe..."), animation);
+				rec_state := REC_GEN_FILE_NAME;				
 				// ---------------------------------------------------------------------------------------- 
 				// Command delete recipe
 			ELSIF (RECIPE.CMD.Delete = TRUE AND RECIPE.PAR.RecipeName <> "") THEN
@@ -453,11 +483,13 @@ PROGRAM _CYCLIC
 			// Save recipe under new name
 			IF(RECIPE.CMD.Rename) THEN
 				RecipeName := RecipeNameNew;	
-			END_IF
-			
+			END_IF		
+		
 			// Proceed with next step
 			IF(RECIPE.CMD.Delete) THEN
 				rec_state := REC_DELETE;
+			ELSIF(RECIPE.CMD.View) THEN
+				rec_state := REC_VIEW;
 			ELSIF(RECIPE.CMD.Rename AND NOT REC_USE_UNICODE) THEN
 				rec_state := REC_RENAME;
 			ELSE
@@ -634,6 +666,31 @@ PROGRAM _CYCLIC
 				brwcscat(ADR(tmpWStr1), ADR(RecipeName));
 				rec_state := CreateError(ADR(RECIPE), FRename.status, tmpWStr1, rec_state);
 			END_IF
+			// --------------------------------------------------------------------------------------------------------------------
+			// View selected file																			
+			// --------------------------------------------------------------------------------------------------------------------
+		REC_VIEW:
+			IF(RECIPE.DAT.RecipeNum > 0) THEN
+				FOR idx:=0 TO SIZEOF(REC_VIEW_FILTER)/SIZEOF(REC_VIEW_FILTER[0]) - 1 DO
+					IF(brsstrlen(ADR(RecipeFullFileName)) >= brsstrlen(ADR(REC_VIEW_FILTER[idx])) AND REC_VIEW_FILTER[idx] <> '') THEN
+						// -------------------------------------------------------------------------------- 		
+						// Verify that file name contains filter											
+						IF(brsmemcmp(ADR(RecipeFullFileName) + brsstrlen(ADR(RecipeFullFileName)) - brsstrlen(ADR(REC_VIEW_FILTER[idx])) , ADR(REC_VIEW_FILTER[idx]), brsstrlen(ADR(REC_VIEW_FILTER[idx]))) = 0) THEN
+							RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath := '/FileDevice:';
+							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR(RECIPE.PAR.DeviceName));
+							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR("/"));
+							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR(RecipeFullFileName));
+							RECIPE.CMD.View := FALSE;
+							RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFile := TRUE;
+							rec_state := REC_WAIT;
+							RETURN;
+						END_IF
+					END_IF
+				END_FOR;
+				RECIPE.DAT.Status := "error this file extension is not supported for viewing";
+				RECIPE.CMD.View := FALSE;
+				rec_state := REC_WAIT;
+			END_IF			
 			// --------------------------------------------------------------------------------------------------------------------
 			// Error 
 			// --------------------------------------------------------------------------------------------------------------------					
