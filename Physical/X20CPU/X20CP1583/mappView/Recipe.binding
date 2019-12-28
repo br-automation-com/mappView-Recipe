@@ -61,6 +61,14 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecFilter" attribute="enable" />
 		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownload" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecView" attribute="enable" />
+		</Binding>
 	
 		<!-- Multiple bindings from mappView to PLC />-->
 		<Binding mode="oneWayToSource">
@@ -99,9 +107,17 @@
 			</Source>
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecItems" attribute="value" />
 		</Binding>
-	<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
-<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecView" attribute="enable" />
-</Binding>
-</Bindings>
+		
+		<Binding mode="oneWay">
+			<Source xsi:type="listElement">
+				<Selector xsi:type="session" refId="::SYSTEM:clientInfo.slotId" attribute="value" />
+				<be:List xsi:type="be:opcUa" attribute="value">
+					<bt:Element index="0" refId="::AsGlobalPV:Recipe_01.VIS[0].DownloadFileUrl" />
+					<bt:Element index="1" refId="::AsGlobalPV:Recipe_01.VIS[1].DownloadFileUrl" />
+					<bt:Element index="2" refId="::AsGlobalPV:Recipe_01.VIS[2].DownloadFileUrl" />
+				</be:List>
+			</Source>
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownload" attribute="path" />
+		</Binding>
+	</Bindings>
 </BindingsSet>

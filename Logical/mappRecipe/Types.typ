@@ -3,7 +3,7 @@
 
 TYPE
 	recSTATE : 
-		( (*Recipe managment state machine*)
+		( (*Recipe management state machine*)
 		REC_WAIT,
 		REC_REG_NAME,
 		REC_REG_VAR,
@@ -17,6 +17,11 @@ TYPE
 		REC_DELETE,
 		REC_RENAME,
 		REC_VIEW,
+		REC_DOWNLOAD,
+		REC_DOWNLOAD_1,
+		REC_DOWNLOAD_2,
+		REC_DOWNLOAD_3,
+		REC_DOWNLOAD_4,
 		REC_ERROR
 		);
 	recTYPE : 
@@ -30,50 +35,52 @@ END_TYPE
 (*Global structure*)
 
 TYPE
-	recERR : 	STRUCT  (*Recipe managment error structure*)
+	recERR : 	STRUCT  (*Recipe management error structure*)
 		Text : WSTRING[200]; (* Error text *)
 		No : DINT; (* Error number *)
 		State : recSTATE; (* Error step *)
 	END_STRUCT;
-	recCMD : 	STRUCT  (*Recipe managment command structure*)
-		Init : BOOL := TRUE;
-		New : BOOL;
-		Load : BOOL;
-		Save : BOOL;
-		View : BOOL;
-		Rename : BOOL;
-		Delete : BOOL; (* Delete selected file *)
-		ErrorReset : BOOL;
+	recCMD : 	STRUCT  (*Recipe management command structure*)
+		Init : BOOL := TRUE; (*Init recipes managment*)
+		New : BOOL; (*Create new recipe*)
+		Load : BOOL; (*Load recipe*)
+		Save : BOOL; (*Save recipe*)
+		View : BOOL; (*View recipe*)
+		Rename : BOOL; (*Rename recipe*)
+		Delete : BOOL; (*Delete recipe*)
+		Download : BOOL; (*Download recipe*)
+		ErrorReset : BOOL; (*Reset pending errors*)
 	END_STRUCT;
-	recPAR : 	STRUCT  (*Recipe managment parameter structure*)
+	recPAR : 	STRUCT  (*Recipe management parameter structure*)
 		RecipeVariable : STRING[200]; (*Name of the variable where the data is stored*)
 		RecipeName : WSTRING[REC_NAME_LENGTH]; (*Recipe name*)
-		RecipeNameNew : WSTRING[REC_NAME_LENGTH]; (*Recipe name*)
-		RecipeID : STRING[REC_NAME_LENGTH]; (*Recipe name*)
+		RecipeNameNew : WSTRING[REC_NAME_LENGTH]; (*New recipe name*)
+		RecipeID : STRING[REC_NAME_LENGTH]; (*File name of the recipe*)
 		RecipeDirectory : STRING[200]; (*Recipe directory*)
 		DeviceName : STRING[100]; (*Device name where the recipes are stored*)
 		MpLink : MpComIdentType; (*MpLink from mappRecipe*)
-		Initialized : BOOL; (*Indicates that recipe managment was initialized*)
+		Initialized : BOOL; (*Indicates that recipe management was initialized*)
 		VisuSlotID : USINT; (*ID for connected web connection*)
 		VisuEnableCommand : BOOL;
 	END_STRUCT;
-	recDAT : 	STRUCT  (*Recipe managment data structure*)
-		RecipeNames : ARRAY[0..REC_MAX_NUM]OF WSTRING[REC_NAME_LENGTH]; (*Recipe unicode name*)
-		RecipeIDs : ARRAY[0..REC_MAX_NUM]OF STRING[REC_NAME_LENGTH]; (*Recipe unicode name*)
+	recDAT : 	STRUCT  (*Recipe management data structure*)
+		RecipeNames : ARRAY[0..REC_MAX_NUM]OF WSTRING[REC_NAME_LENGTH]; (*Recipe unicode names*)
+		RecipeIDs : ARRAY[0..REC_MAX_NUM]OF STRING[REC_NAME_LENGTH]; (*File name of the recipes*)
 		RecipeNum : UINT; (*Number of recipes*)
 		Status : WSTRING[100]; (*Shows the result of the last command*)
 	END_STRUCT;
-	recVIS : 	STRUCT  (*Recipe managment visualization structure*)
-		RecipeNames : ARRAY[0..REC_MAX_NUM]OF WSTRING[REC_VIS_LENGTH]; (*Recipe file size*)
-		RecipeNum : UINT; (*Number of recipes*)
-		RecipeFilter : WSTRING[REC_NAME_LENGTH]; (*Filter for recipe name	*)
-		RecipeSelect : WSTRING[REC_NAME_LENGTH]; (*Select new or renamed recipe in list box*)
-		RecipeDoubleClick : USINT; (*TrackDoubleClick event*)
+	recVIS : 	STRUCT  (*Recipe management visualization structure*)
+		RecipeNames : ARRAY[0..REC_MAX_NUM]OF WSTRING[REC_VIS_LENGTH]; (*Recipe names as mappView data provider*)
+		RecipeNum : UINT; (*Number of visible recipes*)
+		RecipeFilter : WSTRING[REC_NAME_LENGTH]; (*Only show recipes that fit this pattern*)
+		RecipeSelect : WSTRING[REC_NAME_LENGTH]; (*Select recipe in listbox after command new or rename*)
+		DownloadFileUrl : STRING[REC_NAME_LENGTH]; (*URL used with recipe download*)
+		RecipeDoubleClick : USINT; (*Track double click event*)
 		ViewFilePath : STRING[REC_VIS_LENGTH]; (*Full path for viewing file*)
-		ViewFile : BOOL; (*Show message box on error*)
+		ViewFile : BOOL; (*Trigger that opens the fly out window when viewing recipes*)
 		ShowMessageBoxError : BOOL; (*Show message box on error*)
 	END_STRUCT;
-	recMAIN : 	STRUCT  (*Recipe managment main structure*)
+	recMAIN : 	STRUCT  (*Recipe management main structure*)
 		CMD : recCMD; (* Command structure *)
 		PAR : recPAR; (* Parameter structure *)
 		DAT : recDAT; (*Data structure*)

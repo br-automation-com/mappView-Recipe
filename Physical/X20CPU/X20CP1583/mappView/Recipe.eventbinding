@@ -515,6 +515,51 @@
 				</Sequence>				
 			</EventHandler>
 		</EventBinding>
+				
+		<!-- Command load recipe />-->
+		<EventBinding id="Recipe_01.btnRecDownload.Click">
+			<Source contentRefId="contentRecipe" widgetRefId="btnRecDownload" xsi:type="widgets.brease.Button.Event" event="Click" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<!-- Read selected recipe name />-->
+			<Operand name="lstRecNames" datatype="ANY_STRING">
+				<ReadTarget xsi:type="widgets.brease.ListBox.ReadAction" contentRefId="contentRecipe" widgetRefId="lstRecNames" >
+					<Method xsi:type="widgets.brease.ListBox.Action.GetSelectedValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler>
+				<Sequence>
+					<!-- Set slot ID />-->
+					<Step order="1">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.VisuSlotID" >
+								<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="=slotId" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Set recipe name />-->
+					<Step order="2">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
+								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Set command />-->
+					<Step order="3">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.Download" >
+								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
+							</Target>
+						</Action>
+					</Step>
+				</Sequence>				
+			</EventHandler>
+		</EventBinding>
 		
 		<!-- Command delete recipe />-->
 		<EventBinding id="Recipe_01.btnRecDelete.Click">

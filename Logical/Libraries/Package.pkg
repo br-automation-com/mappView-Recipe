@@ -2,6 +2,8 @@
 <?AutomationStudio Version=4.5.4.123 SP?>
 <Package xmlns="http://br-automation.co.at/AS/Package">
   <Objects>
+    <Object Type="Library" Language="binary" Description="This library contains FBKs for exchanging and formatting data (message based) via HTTP (TCP).">AsHttp</Object>
+    <Object Type="Library" Language="binary" Description="The AsMem library makes it possible to manage memory blocks located in large memory areas (memory partitions).">AsMem</Object>
     <Object Type="Library" Language="binary" Description="This library contains function interfaces for IEC 61131-3 operator functions. For the most part, these are mathematical and logical functions.">operator</Object>
     <Object Type="Library" Language="binary" Description="This library contains runtime functions for IEC tasks.">runtime</Object>
     <Object Type="Library" Language="binary" Description="The AsTime Library supports DATE_AND_TIME and TIME data types.">astime</Object>

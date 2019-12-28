@@ -75,3 +75,26 @@ FUNCTION WString2DataProvider : BOOL
 		TargetString : UDINT;
 	END_VAR
 END_FUNCTION
+
+FUNCTION ReplaceString : BOOL
+	VAR_INPUT
+		dataSTR : UDINT;
+		searchSTR : UDINT;
+		replaceSTR : UDINT;
+	END_VAR
+	VAR
+		idx : UDINT;
+	END_VAR
+END_FUNCTION
+
+FUNCTION FindInMem : UDINT
+	VAR_INPUT
+		data1 : UDINT;
+		len1 : UDINT;
+		data2 : UDINT;
+		len2 : UDINT;
+	END_VAR
+	VAR
+		idx : UDINT;
+	END_VAR
+END_FUNCTION

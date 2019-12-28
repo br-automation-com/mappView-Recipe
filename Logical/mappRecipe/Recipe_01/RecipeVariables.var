@@ -37,6 +37,15 @@ VAR
 	MpRecipeError : BOOL; (*Genereic status error*)
 	MpRecipeStatusID : DINT; (*Generic error details*)
 	DoubleClickRecipeName : ARRAY[0..REC_MAX_CLIENTS_ID] OF TON_10ms;
+	response_header : httpResponseHeader_t;
+	response_header_data : STRING[300];
+	download_timeout : TON_10ms;
+	upload_response : ARRAY[0..1] OF STRING[600];
+	file_name_start : UDINT;
+	file_name_len : UDINT;
+	file_data_start : UDINT;
+	file_data_len : UDINT;
+	file_name : STRING[100];
 END_VAR
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 (*Local function calls*)
@@ -46,8 +55,14 @@ VAR
 	DRead : DirReadEx;
 	DClose : DirClose;
 	DCreate : DirCreate;
+	FOpen : FileOpen;
+	FRead : FileReadEx;
+	FClose : FileClose;
 	FDelete : FileDelete;
 	FRename : FileRename;
+	WebserviceDownload : httpService := (0);
+	AsMemPartCreate_0 : AsMemPartCreate;
+	AsMemPartAllocClear_0 : AsMemPartAllocClear;
 	MpRecipeCsv_0 : MpRecipeCsv;
 	MpRecipeXml_0 : MpRecipeXml;
 	MpRecipeRegPar_0 : MpRecipeRegPar;
@@ -61,9 +76,24 @@ VAR CONSTANT
 	ERR_REC_NAME_EXISTS : DINT := 50101; (*Recipe name already exists*)
 	ERR_REC_NAME_LOST : DINT := 50102; (*Recipe name was not found*)
 	ERR_REC_NAME_LENGTH : DINT := 50103; (*One or more recipe names exceeds maximum length*)
+END_VAR
+VAR
 	ERR_REC_DEV_NAME_EMPTY : DINT := 50110; (*Device name is empty*)
+END_VAR
+VAR CONSTANT
 	ERR_REC_VAR_NAME_EMPTY : DINT := 50120; (*Variable name is empty*)
 	ERR_REC_NOT_INITIALIZED : DINT := 50130; (*Recipemanagement is not initialized*)
-	ERR_REC_MAX_NUM : DINT := 50200; (*Maximum number of recipes reached*)
-	ERR_REC_TASK_NAME : DINT := 50300; (*Task name is incorrect*)
+	ERR_REC_MAX_NUM : DINT := 50140; (*Maximum number of recipes reached*)
+	ERR_REC_TASK_NAME : DINT := 50150; (*Task name is incorrect*)
+END_VAR
+VAR
+	ERR_MEM_ALLOC : UINT := 50300; (*Memory allocation for file upload and download failed*)
+	ERR_MEM_DOWNLOAD : UINT := 50310; (*Size of download file exceeds maximum*)
+	ERR_TIMEOUT_DOWNLOAD : UINT := 50320; (*Download response timed out*)
+	ERR_POS_NAME_UPLOAD : UINT := 50400; (*Can not find filename in upload response*)
+	ERR_SIZE_NAME_UPLOAD : UINT := 50401; (*Can not determine end of filename in upload response*)
+	ERR_LEN_NAME_UPLOAD : UINT := 50402; (*Filename is too long in upload response*)
+	ERR_POS_DATA_UPLOAD : UINT := 50403; (*Can not find data in upload response*)
+	ERR_SIZE_DATA_UPLOAD : UINT := 50404; (*Can not determine end of data in upload response*)
+	ERR_MEM_UPLOAD : UINT := 50410; (*Size of upload file exceeds maximum size*)
 END_VAR

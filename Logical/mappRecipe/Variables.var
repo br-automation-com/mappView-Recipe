@@ -8,6 +8,7 @@ VAR
 END_VAR
 VAR CONSTANT
 	REC_MAX_NUM : USINT := 100; (*Maximum number of recipes*)
+	REC_UPLOAD_DOWNLOAD_SIZE : UDINT := 100000; (*Maximum size of memory allocated for uploading and downloading files*)
 	REC_NAME_LENGTH : USINT := 40; (*Maximum length for a recipe name*)
 	REC_VIS_LENGTH : USINT := 120; (*Make this REC_NAME_LENGTH  x3*)
 	REC_MAX_CLIENTS_ID : USINT := 2; (*Highest client ID for concurrent web client connections. Do not change this number.*)

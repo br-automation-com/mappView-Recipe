@@ -1,3 +1,8 @@
+Version 0.4 (under construction)
+- Added support for recipe download over mappView
+- Removed view file status message
+- Code cleanup
+
 Version 0.3
 - Added categories to mapp function blocks to seperate recipe data
 - Added function to view files by double click or command

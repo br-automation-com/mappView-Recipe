@@ -158,3 +158,33 @@ FUNCTION IsInstrW
 		END_FOR;
 	END_IF
 END_FUNCTION
+
+//******************************************************************************************************
+// Find second data in first data																		
+//******************************************************************************************************
+FUNCTION FindInMem
+	IF (len1 > len2) THEN
+		FOR idx:=0 TO len1 - len2 DO
+			IF (brsmemcmp(data1 + idx, data2, len2) = 0) THEN
+				FindInMem := idx;
+				EXIT;
+			END_IF
+		END_FOR;
+	END_IF
+END_FUNCTION
+
+//******************************************************************************************************
+// Find and replace string																	
+//******************************************************************************************************
+FUNCTION ReplaceString
+	IF (brsstrlen(dataSTR) > brsstrlen(searchSTR)) THEN
+		FOR idx:=0 TO brsstrlen(dataSTR) - brsstrlen(searchSTR) DO
+			IF (brsmemcmp(dataSTR + idx, searchSTR, brsstrlen(searchSTR)) = 0) THEN
+				brsmemmove(dataSTR + idx + brsstrlen(replaceSTR), dataSTR + idx + brsstrlen(searchSTR), brsstrlen(dataSTR) - idx - brsstrlen(searchSTR));
+				brsmemcpy(dataSTR + idx, replaceSTR, brsstrlen(replaceSTR));
+				ReplaceString := TRUE;
+				EXIT;
+			END_IF
+		END_FOR;
+	END_IF
+END_FUNCTION
