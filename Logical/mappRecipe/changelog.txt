@@ -1,4 +1,4 @@
-Version 0.4 (under construction)
+Version 0.4
 - Added support for recipe download over mappView
 - Removed view file status message
 - Code cleanup
