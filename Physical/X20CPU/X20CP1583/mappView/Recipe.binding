@@ -119,5 +119,9 @@
 			</Source>
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownload" attribute="path" />
 		</Binding>
-	</Bindings>
+	<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecDownload" attribute="enable" />
+</Binding>
+</Bindings>
 </BindingsSet>
