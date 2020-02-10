@@ -492,7 +492,7 @@ PROGRAM _CYCLIC
 						END_IF
 					END_IF
 				END_IF
-				// Use recipe name as file name when using standard strings
+			// Use recipe name as file name when using standard strings
 			ELSE
 				brwcsconv(ADR(RECIPE.PAR.RecipeID), ADR(RecipeName), brwUCtoU8);
 			END_IF
@@ -685,7 +685,14 @@ PROGRAM _CYCLIC
 				brsmemmove(ADR(RECIPE.DAT.RecipeNames[RecipeIndex]),ADR(RECIPE.DAT.RecipeNames[RecipeIndex+1]), (RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeNames[0]));
 				brsmemmove(ADR(RECIPE.DAT.RecipeIDs[RecipeIndex]),ADR(RECIPE.DAT.RecipeIDs[RecipeIndex+1]), (RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeIDs[0]));
 				RECIPE.DAT.RecipeNum := RECIPE.DAT.RecipeNum - 1;
-				InsertRecName(ADR(RECIPE), RecipeNameNew, RECIPE.PAR.RecipeID);
+				
+				// Use the same name for unicode
+				IF(REC_USE_UNICODE) THEN
+					InsertRecName(ADR(RECIPE), RecipeNameNew, RECIPE.PAR.RecipeID);
+				// Use the new name for ASCII
+				ELSE
+					InsertRecName(ADR(RECIPE), RecipeNameNew, tmpStr2);
+				END_IF
 
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := RecipeNameNew;
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("renamed recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
