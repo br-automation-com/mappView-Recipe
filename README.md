@@ -23,7 +23,6 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.4
-- Added support for recipe download over mappView
-- Removed view file status message
-- Code cleanup
+#### Version 0.5
+- Added support for recipe upload over mappView 
+- Fixed renaming recipes in ASCII mode 
