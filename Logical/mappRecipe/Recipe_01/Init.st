@@ -54,4 +54,12 @@ PROGRAM _INIT
 			rec_state := CreateError(ADR(RECIPE), ERR_MEM_ALLOC, "file upload and download alloc failed", rec_state);
 		END_IF
 	END_IF
+	
+	// ----------------------------------------------------------------------------------------
+	// Generate HTML messages for web upload
+	upload_response	:= '<html><body><form action="/uploadA.html" name="form_upload" method="post" enctype="multipart/form-data" >
+	<label for="file-upload" style="font-weight:bold;font-family: sans-serif;font-size:16px;padding:15px 50px;10px;10px;" class="custom-file-upload">Upload</label>
+	<input type="file" id="file-upload" style="display:none;" onchange="form.submit()" name="file_selected" content-type="application/octet-stream" />
+	</form><body></html> ';
+	WebServiceUpload.pServiceName := ADR('uploadA.html');
 END_PROGRAM

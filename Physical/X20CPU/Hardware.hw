@@ -7,6 +7,7 @@
     </Connector>
     <Parameter ID="ConfigurationID" Value="Tmp_Recipe" />
     <Parameter ID="UserPartitionSize" Value="200" />
+    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="VolatileGlobalPvSize" Value="300000" />
     <Parameter ID="Cyclic8Stack" Value="20000" />
     <Group ID="FileDevice1" />

@@ -516,7 +516,7 @@
 			</EventHandler>
 		</EventBinding>
 				
-		<!-- Command load recipe />-->
+		<!-- Command download recipe />-->
 		<EventBinding id="Recipe_01.btnRecDownload.Click">
 			<Source contentRefId="contentRecipe" widgetRefId="btnRecDownload" xsi:type="widgets.brease.Button.Event" event="Click" />
 			<!-- Read session id />-->
@@ -558,6 +558,193 @@
 						</Action>
 					</Step>
 				</Sequence>				
+			</EventHandler>
+		</EventBinding>
+		
+		<!-- Opens overwrite message box />-->
+		<EventBinding id="Recipe_01.VIS[0].UploadOverwriteRequest">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[0].UploadOverwriteRequest" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=0 AND newValue">
+				<Action>
+					<Target xsi:type="clientSystem.Action">
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Recipe already exists. Do you want to overwrite it?" header="Overwrite?" icon="Question"  />
+					</Target>
+					<Result>
+						<ResultHandler condition="result = 1">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="1" />
+								</Target>
+							</Action>
+						</ResultHandler>
+						<ResultHandler condition="result = 2">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="2" />
+								</Target>
+							</Action>
+						</ResultHandler>
+					</Result>
+				</Action>
+			</EventHandler>
+		</EventBinding>
+		<EventBinding id="Recipe_01.VIS[1].UploadOverwriteRequest">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[1].UploadOverwriteRequest" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=1 AND newValue">
+				<Action>
+					<Target xsi:type="clientSystem.Action">
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Recipe already exists. Do you want to overwrite it?" header="Overwrite?" icon="Question"  />
+					</Target>
+					<Result>
+						<ResultHandler condition="result = 1">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="1" />
+								</Target>
+							</Action>
+						</ResultHandler>
+						<ResultHandler condition="result = 2">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="2" />
+								</Target>
+							</Action>
+						</ResultHandler>
+					</Result>
+				</Action>
+			</EventHandler>
+		</EventBinding>
+		<EventBinding id="Recipe_01.VIS[2].UploadOverwriteRequest">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[0].UploadOverwriteRequest" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=2 AND newValue">
+				<Action>
+					<Target xsi:type="clientSystem.Action">
+						<Method xsi:type="clientSystem.Action.ShowMessageBox" type="YesNo" message="Recipe already exists. Do you want to overwrite it?" header="Overwrite?" icon="Question"  />
+					</Target>
+					<Result>
+						<ResultHandler condition="result = 1">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="1" />
+								</Target>
+							</Action>
+						</ResultHandler>
+						<ResultHandler condition="result = 2">
+							<Action>
+								<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].UploadOverwriteResponse" >
+									<Method xsi:type="opcUa.NodeAction.SetValueNumber" value="2" />
+								</Target>
+							</Action>
+						</ResultHandler>
+					</Result>
+				</Action>
+			</EventHandler>
+		</EventBinding>
+		
+		<!-- Reload upload button />-->
+		<EventBinding id="Recipe_01.VIS[0].ReloadUpload">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[0].ReloadUpload" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=0 AND newValue" >
+				<Sequence>
+					<!-- Set web viewer path />-->
+					<Step order="1">
+						<Action>              
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
+							</Target>
+						</Action>
+					</Step>
+					<!-- Reset upload trigger button />-->
+					<Step order="2">
+						<Action>              
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].ReloadUpload" >
+								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="false" />
+							</Target>       
+						</Action>
+					</Step>
+				</Sequence>
+			</EventHandler>
+		</EventBinding>
+		<EventBinding id="Recipe_01.VIS[1].ReloadUpload">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[1].ReloadUpload" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=1 AND newValue" >
+				<Sequence>
+					<!-- Set web viewer path />-->
+					<Step order="1">
+						<Action>              
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
+							</Target>
+						</Action>
+					</Step>
+					<!-- Reset upload trigger button />-->
+					<Step order="2">
+						<Action>              
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].ReloadUpload" >
+								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="false" />
+							</Target>       
+						</Action>
+					</Step>
+				</Sequence>
+			</EventHandler>
+		</EventBinding>
+		<EventBinding id="Recipe_01.VIS[2].ReloadUpload">
+			<Source xsi:type="opcUa.Event" refId="::AsGlobalPV:Recipe_01.VIS[2].ReloadUpload" event="ValueChanged" />
+			<!-- Read session id />-->
+			<Operand name="slotId" datatype="ANY_INT">
+				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
+					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=2 AND newValue" >
+				<Sequence>
+					<!-- Set web viewer path />-->
+					<Step order="1">
+						<Action>              
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
+							</Target>
+						</Action>
+					</Step>
+					<!-- Reset upload trigger button />-->
+					<Step order="2">
+						<Action>              
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].ReloadUpload" >
+								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="false" />
+							</Target>       
+						</Action>
+					</Step>
+				</Sequence>
 			</EventHandler>
 		</EventBinding>
 		
