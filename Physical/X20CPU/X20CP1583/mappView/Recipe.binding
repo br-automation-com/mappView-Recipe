@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <BindingsSet xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Recipe_binding">
 	<Bindings>
 		<Binding mode="twoWay">
@@ -63,7 +63,7 @@
 		</Binding>
 		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownload" attribute="enable" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownloadRecipe" attribute="enable" />
 		</Binding>
 		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
@@ -117,7 +117,7 @@
 					<bt:Element index="2" refId="::AsGlobalPV:Recipe_01.VIS[2].DownloadFileUrl" />
 				</be:List>
 			</Source>
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownload" attribute="path" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownloadRecipe" attribute="path" />
 		</Binding>
 	<Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />

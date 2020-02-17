@@ -1,3 +1,6 @@
+Version 0.6
+- Renamed web controls to avoid conflicts with other samples
+
 Version 0.5
 - Added support for recipe upload over mappView
 - Fixed renaming recipes in ASCII mode

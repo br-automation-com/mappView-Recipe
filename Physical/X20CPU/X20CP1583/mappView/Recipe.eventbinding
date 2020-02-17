@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <EventBindingSet id="Recipe_eventbinding" xmlns="http://www.br-automation.com/iat2014/eventbinding/v2" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Bindings>
 		<!-- File open on button click />-->
@@ -673,7 +673,7 @@
 					<!-- Set web viewer path />-->
 					<Step order="1">
 						<Action>              
-							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUploadRecipe" >                                  
 								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
 							</Target>
 						</Action>
@@ -702,7 +702,7 @@
 					<!-- Set web viewer path />-->
 					<Step order="1">
 						<Action>              
-							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUploadRecipe" >                                  
 								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
 							</Target>
 						</Action>
@@ -731,7 +731,7 @@
 					<!-- Set web viewer path />-->
 					<Step order="1">
 						<Action>              
-							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUpload" >                                  
+							<Target xsi:type="widgets.brease.WebViewer.Action" contentRefId="contentRecipe" widgetRefId="WebUploadRecipe" >                                  
 								<Method xsi:type="widgets.brease.WebViewer.Action.Reload" />              
 							</Target>
 						</Action>
