@@ -47,7 +47,16 @@ PROGRAM _CYCLIC
 	ELSIF(WebServiceUpload.status = ERR_OK AND WebServiceUpload.send = FALSE) THEN 
 		WebServiceUpload.send := TRUE;
 		// New upload data arrived
-	ELSIF(WebServiceUpload.send = FALSE AND WebServiceUpload.requestDataLen > 0) THEN
+	ELSIF(WebServiceUpload.send = FALSE AND WebServiceUpload.requestDataLen > 0 AND RECIPE.CMD.Upload = FALSE) THEN
+		// Add delay so that upload can finish
+		upload_delay.PT := WebServiceUpload.requestDataLen/100000*5;
+		upload_delay.IN := TRUE;
+		upload_delay();
+	END_IF
+	// Check new uploaded data
+	IF(upload_delay.Q AND RECIPE.CMD.Upload = FALSE) THEN
+		upload_delay.IN := FALSE;
+		upload_delay();
 		RECIPE.CMD.Upload := 1;
 	END_IF
 	

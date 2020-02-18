@@ -1,6 +1,7 @@
 Version 0.6
 - Renamed web controls to avoid conflicts with other samples
 - Fixed download not working when downloading the same file again
+- Fixed upload not working with large files > 1 MB
 
 Version 0.5
 - Added support for recipe upload over mappView

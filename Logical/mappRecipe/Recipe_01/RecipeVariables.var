@@ -41,6 +41,7 @@ VAR
 	DoubleClickRecipeName : ARRAY[0..REC_MAX_CLIENTS_ID] OF TON_10ms;
 	response_header : httpResponseHeader_t;
 	response_header_data : STRING[300];
+	upload_delay : TON_10ms;
 	download_timeout : TON_10ms;
 	upload_response : STRING[600];
 	file_name_start : UDINT;
