@@ -873,6 +873,7 @@ PROGRAM _CYCLIC
 			// Sending data finished
 			ELSIF (WebserviceDownload.send = TRUE) THEN
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("downloaded recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
+				RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl := '';
 				WebserviceDownload.send := FALSE;
 				RECIPE.CMD.Download := 0;
 				rec_state := REC_WAIT;
