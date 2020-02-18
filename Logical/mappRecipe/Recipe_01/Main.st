@@ -57,7 +57,7 @@ PROGRAM _CYCLIC
 	IF(upload_delay.Q AND RECIPE.CMD.Upload = FALSE) THEN
 		upload_delay.IN := FALSE;
 		upload_delay();
-		RECIPE.CMD.Upload := 1;
+		RECIPE.CMD.Upload := TRUE;
 	END_IF
 	
 	// --------------------------------------------------------------------------------------------------------------------****
@@ -93,11 +93,11 @@ PROGRAM _CYCLIC
 			// Handle double click for file open
 			IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 0) THEN
 				DoubleClickRecipeName[VisuSlotID].PT := 50;
-				DoubleClickRecipeName[VisuSlotID].IN := 1;
+				DoubleClickRecipeName[VisuSlotID].IN := TRUE;
 				DoubleClickRecipeName[VisuSlotID]();
 				// Open selected file
 				IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 1) THEN
-					DoubleClickRecipeName[VisuSlotID].IN := 0;
+					DoubleClickRecipeName[VisuSlotID].IN := FALSE;
 					DoubleClickRecipeName[VisuSlotID]();
 					RECIPE.VIS[VisuSlotID].RecipeDoubleClick := 0;
 					RECIPE.PAR.VisuSlotID := VisuSlotID;
@@ -105,7 +105,7 @@ PROGRAM _CYCLIC
 				END_IF
 			END_IF
 			IF(DoubleClickRecipeName[VisuSlotID].Q) THEN
-				DoubleClickRecipeName[VisuSlotID].IN := 0;
+				DoubleClickRecipeName[VisuSlotID].IN := FALSE;
 				DoubleClickRecipeName[VisuSlotID]();
 				IF(RECIPE.VIS[VisuSlotID].RecipeDoubleClick > 0) THEN
 					RECIPE.VIS[VisuSlotID].RecipeDoubleClick := RECIPE.VIS[VisuSlotID].RecipeDoubleClick - 1;
@@ -313,7 +313,7 @@ PROGRAM _CYCLIC
 		// Create recipe directory																
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_CREATE_DIR:
-			DCreate.enable 	:= 1;
+			DCreate.enable 	:= TRUE;
 			DCreate.pDevice	:= ADR(RECIPE.PAR.DeviceName);
 			DCreate.pName := ADR(RECIPE.PAR.RecipeDirectory);
 			DCreate();
@@ -339,7 +339,7 @@ PROGRAM _CYCLIC
 			RECIPE.DAT.RecipeNum := 0;
 			// ---------------------------------------------------------------------------------------- 		
 			// Set values and get device dir															
-			DInfo.enable 	:= 1;
+			DInfo.enable 	:= TRUE;
 			DInfo.pDevice	:= ADR(RECIPE.PAR.DeviceName);
 			DInfo();
 						
@@ -367,7 +367,7 @@ PROGRAM _CYCLIC
 		// Open directory 																				
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_READ_DIR_1:														
-			DOpen.enable 	:= 1;
+			DOpen.enable 	:= TRUE;
 			DOpen.pDevice	:= ADR(RECIPE.PAR.DeviceName);
 			DOpen.pName 	:= ADR(RECIPE.PAR.RecipeDirectory);
 			DOpen();
@@ -390,7 +390,7 @@ PROGRAM _CYCLIC
 		// Read file directory information																
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_READ_DIR_2:													
-			DRead.enable 	:= 1;
+			DRead.enable 	:= TRUE;
 			DRead.ident		:= DOpen.ident;
 			DRead.pData 	:= ADR(lDirReadData);
 			DRead.data_len 	:= SIZEOF(lDirReadData);
@@ -441,7 +441,7 @@ PROGRAM _CYCLIC
 		// Close directory information																	
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_READ_DIR_3:														
-			DClose.enable 	:= 1;
+			DClose.enable 	:= TRUE;
 			DClose.ident	:= DOpen.ident;
 			DClose();
 										
@@ -450,7 +450,7 @@ PROGRAM _CYCLIC
 			IF (DClose.status = OK) THEN
 				// Reset command and return to wait state												
 				RECIPE.DAT.Status := "initializing complete";
-				RECIPE.CMD.Init	:= 0;
+				RECIPE.CMD.Init	:= FALSE;
 				RECIPE.PAR.RecipeID := '';
 				RECIPE.PAR.Initialized := TRUE;
 				DClose.ident	:= 0;
@@ -638,7 +638,7 @@ PROGRAM _CYCLIC
 		REC_DELETE:		
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
-			FDelete.enable		:= 1;
+			FDelete.enable		:= TRUE;
 			FDelete.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
 			FDelete.pName		:= ADR(RecipeFullFileName);
 			FDelete();
@@ -681,7 +681,7 @@ PROGRAM _CYCLIC
 			
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
-			FRename.enable		:= 1;
+			FRename.enable		:= TRUE;
 			FRename.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
 			FRename.pName		:= ADR(RecipeFullFileName);
 			FRename.pNewName	:= ADR(tmpStr1);
@@ -705,7 +705,7 @@ PROGRAM _CYCLIC
 
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := RecipeNameNew;
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("renamed recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
-				RECIPE.CMD.Rename := 0;
+				RECIPE.CMD.Rename := FALSE;
 				rec_state := REC_WAIT;
 				// Error 		
 			ELSIF (FRename.status <> ERR_FUB_BUSY) THEN
@@ -847,7 +847,7 @@ PROGRAM _CYCLIC
 			
 			// ----------------------------------------------------------------------------------------
 			// Timeout if file is not pulled from browser
-			download_timeout.IN := 1;
+			download_timeout.IN := TRUE;
 			download_timeout.PT := 300;
 			download_timeout();
 			IF(download_timeout.Q) THEN
@@ -877,14 +877,11 @@ PROGRAM _CYCLIC
 			
 			// ----------------------------------------------------------------------------------------
 			// Start sending data
-			IF (WebserviceDownload.status = OK AND WebserviceDownload.send = FALSE) THEN
-				WebserviceDownload.send := TRUE;
-			// Sending data finished
-			ELSIF (WebserviceDownload.send = TRUE) THEN
+			IF (WebserviceDownload.phase = httpPHASE_WAITING) THEN 
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("downloaded recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl := '';
 				WebserviceDownload.send := FALSE;
-				RECIPE.CMD.Download := 0;
+				RECIPE.CMD.Download := FALSE;
 				rec_state := REC_WAIT;
 			// Error
 			ELSIF (WebserviceDownload.status <> ERR_FUB_BUSY) THEN
@@ -1004,7 +1001,7 @@ PROGRAM _CYCLIC
 		REC_UPLOAD_3:		
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
-			FDelete.enable		:= 1;
+			FDelete.enable		:= TRUE;
 			FDelete.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
 			FDelete.pName		:= ADR(RecipeFullFileName);
 			FDelete();
@@ -1082,8 +1079,8 @@ PROGRAM _CYCLIC
 				brsmemset(AsMemPartAllocClear_0.mem, 0, REC_UPLOAD_DOWNLOAD_SIZE);
 				WebServiceUpload.enable := FALSE;
 				WebServiceUpload();
-				RECIPE.CMD.Upload := 0;
-				RECIPE.CMD.Init := 1;
+				RECIPE.CMD.Upload := FALSE;
+				RECIPE.CMD.Init := TRUE;
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].ReloadUpload := TRUE;
 				rec_state := REC_WAIT;
 				// Error

@@ -1,3 +1,6 @@
+Version 0.7
+- Code cleanup
+
 Version 0.6
 - Renamed web controls to avoid conflicts with other samples
 - Fixed download not working when downloading the same file again
