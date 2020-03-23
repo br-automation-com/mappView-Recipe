@@ -2,6 +2,7 @@
 (*Configuration for recipe managment*)
 VAR CONSTANT
 	REC_USE_UNICODE : BOOL := FALSE; (*Use standard strings for recipe name when false, use unicode strings for recipe name when true*)
+	REC_SORT_NUMERIC : BOOL := FALSE; (*Sort recipe names as numeric values instead of alphabetic*)
 END_VAR
 VAR
 	REC_RECIPE_TYPE : recTYPE := typeCSV; (*Type of recipe (CSV / XML)*)

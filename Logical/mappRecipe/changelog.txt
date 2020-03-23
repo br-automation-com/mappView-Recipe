@@ -1,3 +1,6 @@
+Next version
+- Option to sort recipe names as numeric values instead of alphabetic
+
 Version 0.7
 - Code cleanup
 

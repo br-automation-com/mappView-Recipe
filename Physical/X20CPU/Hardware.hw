@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.5.4.123?>
+<?AutomationStudio Version=4.5.5.113?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
   <Module Name="X20CP1583" Type="X20CP1583" Version="1.5.0.0">
     <Connector Name="IF2">
@@ -7,7 +7,6 @@
     </Connector>
     <Parameter ID="ConfigurationID" Value="Tmp_Recipe" />
     <Parameter ID="UserPartitionSize" Value="200" />
-    <Parameter ID="Simulation" Value="1" />
     <Parameter ID="VolatileGlobalPvSize" Value="300000" />
     <Parameter ID="Cyclic8Stack" Value="20000" />
     <Group ID="FileDevice1" />
