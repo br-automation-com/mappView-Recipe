@@ -101,6 +101,7 @@ PROGRAM _CYCLIC
 					DoubleClickRecipeName[VisuSlotID]();
 					RECIPE.VIS[VisuSlotID].RecipeDoubleClick := 0;
 					RECIPE.PAR.VisuSlotID := VisuSlotID;
+					RECIPE.PAR.RecipeName := RECIPE.VIS[VisuSlotID].RecipeSelect;
 					RECIPE.CMD.View := TRUE;
 				END_IF
 			END_IF
@@ -245,13 +246,13 @@ PROGRAM _CYCLIC
 
 			// ---------------------------------------------------------------------------------------- 
 			// Check parameters																					
-			IF (RECIPE.CMD.Init OR RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete) THEN
+			IF (RECIPE.CMD.Init OR RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete OR RECIPE.CMD.View) THEN
 				// Make sure recipe mangament was intialized
 				IF (NOT RECIPE.CMD.Init AND NOT RECIPE.PAR.Initialized) THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NOT_INITIALIZED, "recipe management is not initiialized", rec_state);
 				END_IF
 				// Make sure recipe name is valid
-				IF((RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete) AND RecipeName = "") THEN
+				IF((RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete OR RECIPE.CMD.View) AND RecipeName = "") THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "recipe name is empty", rec_state);
 				END_IF
 				// Make sure new recipe name is valid

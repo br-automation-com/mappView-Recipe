@@ -1,3 +1,6 @@
+Next Version
+- Fixed recipe view does not show correct data on double click or command view
+
 Version 0.6
 - Code cleanup
 - Option to sort recipe names as numeric values instead of alphabetic

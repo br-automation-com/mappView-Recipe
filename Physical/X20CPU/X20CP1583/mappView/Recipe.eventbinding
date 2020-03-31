@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <EventBindingSet id="Recipe_eventbinding" xmlns="http://www.br-automation.com/iat2014/eventbinding/v2" xmlns:types="http://www.br-automation.com/iat2015/widgetTypes/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Bindings>
 		<!-- File open on button click />-->
@@ -8,6 +8,12 @@
 			<Operand name="slotId" datatype="ANY_INT">
 				<ReadTarget xsi:type="session.VariableAction.Read" refId="::SYSTEM:clientInfo.slotId" >
 					<Method xsi:type="session.VariableAction.GetValue" />
+				</ReadTarget>
+			</Operand>
+			<!-- Read selected recipe name />-->
+			<Operand name="lstRecNames" datatype="ANY_STRING">
+				<ReadTarget xsi:type="widgets.brease.ListBox.ReadAction" contentRefId="contentRecipe" widgetRefId="lstRecNames" >
+					<Method xsi:type="widgets.brease.ListBox.Action.GetSelectedValue" />
 				</ReadTarget>
 			</Operand>
 			<EventHandler>
@@ -20,8 +26,16 @@
 							</Target>
 						</Action>
 					</Step>
-					<!-- Set command />-->
+					<!-- Set recipe name />-->
 					<Step order="2">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.PAR.RecipeName" >
+								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Set command />-->
+					<Step order="3">
 						<Action>
 							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.CMD.View" >
 								<Method xsi:type="opcUa.NodeAction.SetValueBool" value="true" />
@@ -41,26 +55,71 @@
 					<Method xsi:type="session.VariableAction.GetValue" />
 				</ReadTarget>
 			</Operand>
-			<EventHandler condition="slotId=0" >		
-				<Action>
-					<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeDoubleClick" >
-						<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
-					</Target>
-				</Action>
+			<!-- Read selected recipe name />-->
+			<Operand name="lstRecNames" datatype="ANY_STRING">
+				<ReadTarget xsi:type="widgets.brease.ListBox.ReadAction" contentRefId="contentRecipe" widgetRefId="lstRecNames" >
+					<Method xsi:type="widgets.brease.ListBox.Action.GetSelectedValue" />
+				</ReadTarget>
+			</Operand>
+			<EventHandler condition="slotId=0" >
+				<Sequence>
+					<!-- Increase double click counter />-->
+					<Step order="1">		
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeDoubleClick" >
+								<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Remember recipe name />-->
+					<Step order="2">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[0].RecipeSelect" >
+								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+							</Target>
+						</Action>
+					</Step>
+				</Sequence>
 			</EventHandler>
 			<EventHandler condition="slotId=1" >		
-				<Action>
-					<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeDoubleClick" >
-						<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
-					</Target>
-				</Action>
+				<Sequence>
+					<!-- Increase double click counter />-->
+					<Step order="1">		
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeDoubleClick" >
+								<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Remember recipe name />-->
+					<Step order="2">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[1].RecipeSelect" >
+								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+							</Target>
+						</Action>
+					</Step>
+				</Sequence>
 			</EventHandler>
 			<EventHandler condition="slotId=2" >		
-				<Action>
-					<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeDoubleClick" >
-						<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
-					</Target>
-				</Action>
+				<Sequence>
+					<!-- Increase double click counter />-->
+					<Step order="1">		
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeDoubleClick" >
+								<Method xsi:type="opcUa.NodeAction.AddValue" value="1" />
+							</Target>
+						</Action>
+					</Step>
+					<!-- Remember recipe name />-->
+					<Step order="2">
+						<Action>
+							<Target xsi:type="opcUa.NodeAction" refId="::AsGlobalPV:Recipe_01.VIS[2].RecipeSelect" >
+								<Method xsi:type="opcUa.NodeAction.SetValueString" value="=lstRecNames" />
+							</Target>
+						</Action>
+					</Step>
+				</Sequence>
 			</EventHandler>
 		</EventBinding>
 
