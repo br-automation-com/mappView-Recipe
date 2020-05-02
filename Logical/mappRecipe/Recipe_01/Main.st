@@ -826,7 +826,7 @@ PROGRAM _CYCLIC
 			ELSE
 				brsstrcat(ADR(tmpStr1), ADR('.xml'));
 			END_IF
-			ReplaceString(ADR(tmpStr1), ADR(' '), ADR('%20'));
+			ReplaceString(ADR(tmpStr1), ADR(' '), ADR('%20'), FALSE);
 			brsstrcat(ADR(response_header_data), ADR(tmpStr1));
 			brsstrcat(ADR(response_header_data), ADR('"'));
 			
@@ -956,8 +956,8 @@ PROGRAM _CYCLIC
 			// Checking for files with the same name
 			RECIPE.VIS[RECIPE.PAR.VisuSlotID].UploadOverwriteResponse := 0;
 			tmpStr1 := item_name;
-			ReplaceString(ADR(tmpStr1), ADR('.csv'), ADR(''));
-			ReplaceString(ADR(tmpStr1), ADR('.xml'), ADR(''));
+			ReplaceString(ADR(tmpStr1), ADR('.csv'), ADR(''), TRUE);
+			ReplaceString(ADR(tmpStr1), ADR('.xml'), ADR(''), TRUE);
 			
 			FOR idx:=0 TO RECIPE.DAT.RecipeNum DO	
 				IF(RECIPE.CMD.Upload = TRUE AND RECIPE.DAT.RecipeIDs[idx] = tmpStr1) THEN

@@ -83,6 +83,7 @@ FUNCTION ReplaceString : BOOL
 		dataSTR : UDINT;
 		searchSTR : UDINT;
 		replaceSTR : UDINT;
+		first : BOOL;
 	END_VAR
 	VAR
 		idx : UDINT;
