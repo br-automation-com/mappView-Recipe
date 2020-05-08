@@ -1,7 +1,7 @@
 // --------------------------------------------------------------------------------------------------------------------********
 //	Cylic task for recipe management
-//	Version 0.4
-//	Changed 28.12.2019
+//	Version 0.7
+//	Changed 08.05.2020
 // --------------------------------------------------------------------------------------------------------------------********
 
 // --------------------------------------------------------------------------------------------------------------------********
@@ -43,10 +43,10 @@ PROGRAM _CYCLIC
 	// Reset send command 
 	IF(WebServiceUpload.send = TRUE)  THEN		
 		WebServiceUpload.send := FALSE;
-		// Send response when page is loaded or data is posted
+	// Send response when page is loaded or data is posted
 	ELSIF(WebServiceUpload.status = ERR_OK AND WebServiceUpload.send = FALSE) THEN 
 		WebServiceUpload.send := TRUE;
-		// New upload data arrived
+	// New upload data arrived
 	ELSIF(WebServiceUpload.send = FALSE AND WebServiceUpload.requestDataLen > 0 AND RECIPE.CMD.Upload = FALSE) THEN
 		// Add delay so that upload can finish
 		upload_delay.PT := WebServiceUpload.requestDataLen/100000*5;
@@ -134,17 +134,17 @@ PROGRAM _CYCLIC
 			MpRecipeRegPar_0.ErrorReset := FALSE;
 
 			// ---------------------------------------------------------------------------------------- 
-			// Command refresh																			
+			// Command init/refresh																			
 			IF (RECIPE.CMD.Init = TRUE) THEN
 				// Reset data structure and trigger name refresh for vis
 				brsmemset(ADR(RECIPE.DAT), 0, SIZEOF(RECIPE.DAT));
 				brsmemset(ADR(RecipeIDs), 0, SIZEOF(RecipeIDs));
 				brsmemset(ADR(RecipeNumOld), 16#FF, SIZEOF(RecipeNumOld));
 				// Skip variable binding if already initialized
-				IF(MpRecipeRegPar_1.PVName <> 0) THEN 
+				IF(MpRecipeRegPar_1.PVName <> 0) THEN
 					rec_state := REC_READ_DIR;
 				ELSE
-					// Register recipe name varibale first if unicode is used
+					// Register recipe name variable first if unicode is used
 					IF(REC_USE_UNICODE) THEN
 						rec_state := REC_REG_NAME;
 					ELSE
@@ -287,7 +287,7 @@ PROGRAM _CYCLIC
 			// OK																																				
 			IF (NOT MpRecipeRegPar_0.Active AND NOT MpRecipeRegPar_0.Error) THEN
 				rec_state := REC_REG_VAR;
-				// Error
+			// Error
 			ELSIF (MpRecipeRegPar_0.Error) THEN
 				rec_state := CreateError(ADR(RECIPE), MpRecipeRegPar_0.StatusID, "error trying to register recipe name", rec_state);
 			END_IF
@@ -303,7 +303,7 @@ PROGRAM _CYCLIC
 			// OK																																				
 			IF (NOT MpRecipeRegPar_1.Active AND NOT MpRecipeRegPar_1.Error) THEN
 				rec_state := REC_CREATE_DIR;
-				// Error
+			// Error
 			ELSIF (MpRecipeRegPar_1.Error) THEN
 				tmpWStr1 := "error trying to register variable name ";
 				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.RecipeVariable), brwU8toUC);
@@ -324,7 +324,7 @@ PROGRAM _CYCLIC
 			IF (DCreate.status = OK OR DCreate.status = fiERR_DIR_ALREADY_EXIST) THEN
 				// Reset command and return to wait state												
 				rec_state := REC_READ_DIR;
-				// Error 		
+			// Error 		
 			ELSIF (DCreate.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), DCreate.status, "error dir create", rec_state);
 			END_IF			
@@ -377,13 +377,14 @@ PROGRAM _CYCLIC
 			// OK																																				
 			IF (DOpen.status = OK) THEN
 				rec_state := REC_READ_DIR_2;
+			// Create error message for missing directory
 			ELSIF (DInfo.status = fiERR_DIR_NOT_EXIST) THEN
 				tmpWStr1 := "directory ";
 				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.RecipeDirectory), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
 				brwcscat(ADR(tmpWStr1), ADR(" is unavailable"));
 				rec_state := CreateError(ADR(RECIPE), DInfo.status, tmpWStr1, rec_state);				
-				// Error
+			// Error
 			ELSIF (DOpen.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), DOpen.status, "error dir open", rec_state);
 			END_IF;
@@ -431,10 +432,10 @@ PROGRAM _CYCLIC
 				ELSE
 					has_oversized_items := TRUE;
 				END_IF
-				// Last entry reached
+			// Last entry reached
 			ELSIF (DRead.status = fiERR_NO_MORE_ENTRIES) THEN 
 				rec_state := REC_READ_DIR_3;
-				// Error		
+			// Error		
 			ELSIF (DRead.status <> ERR_FUB_BUSY AND DRead.status <> OK) THEN
 				rec_state := CreateError(ADR(RECIPE), DRead.status, "error recipe list read", rec_state);
 			END_IF
@@ -455,12 +456,13 @@ PROGRAM _CYCLIC
 				RECIPE.PAR.RecipeID := '';
 				RECIPE.PAR.Initialized := TRUE;
 				DClose.ident	:= 0;
+				// Create error message for oversized items
 				IF(has_oversized_items) THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_LENGTH, "one or more recipe names exceeds maximum length", rec_state);
 				ELSE
 					rec_state := REC_WAIT;
 				END_IF
-				// Error 		
+			// Error 		
 			ELSIF (DClose.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), DClose.status, "error dir close", rec_state);
 			END_IF
@@ -657,7 +659,7 @@ PROGRAM _CYCLIC
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("deleted recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.CMD.Delete := 0;
 				rec_state := REC_WAIT;
-				// Error 		
+			// Error 		
 			ELSIF (FDelete.status <> ERR_FUB_BUSY) THEN
 				tmpWStr1 := "error deleting recipe ";
 				brwcscat(ADR(tmpWStr1), ADR(RecipeName));
@@ -708,7 +710,7 @@ PROGRAM _CYCLIC
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR("renamed recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.CMD.Rename := FALSE;
 				rec_state := REC_WAIT;
-				// Error 		
+			// Error 		
 			ELSIF (FRename.status <> ERR_FUB_BUSY) THEN
 				tmpWStr1 := "error renaming recipe ";
 				brwcscat(ADR(tmpWStr1), ADR(RecipeName));
@@ -808,7 +810,7 @@ PROGRAM _CYCLIC
 				download_timeout.IN := 0;
 				download_timeout();
 				rec_state := REC_DOWNLOAD_3;
-				// Error
+			// Error
 			ELSIF (FClose.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), FClose.status, "error closing file for download", rec_state);
 			END_IF		
@@ -859,14 +861,14 @@ PROGRAM _CYCLIC
 			// Set URL
 			IF (WebserviceDownload.status = ERR_FUB_BUSY AND RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl = '') THEN
 				brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl), ADR(tmpStr1));
-				// Start sending data
+			// Start sending data
 			ELSIF (WebserviceDownload.status = OK AND WebserviceDownload.send = FALSE AND RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl <> '') THEN
 				WebserviceDownload.send := TRUE;
-				// Sending data finished
+			// Sending data finished
 			ELSIF (WebserviceDownload.send = TRUE) THEN
 				WebserviceDownload.send := FALSE;
 				rec_state := REC_DOWNLOAD_4;
-				// Error
+			// Error
 			ELSIF (WebserviceDownload.status <> ERR_FUB_BUSY AND WebserviceDownload.status <> OK) THEN
 				rec_state := CreateError(ADR(RECIPE), WebserviceDownload.status, "error sending web response", rec_state);
 			END_IF
@@ -919,23 +921,23 @@ PROGRAM _CYCLIC
 								ELSE
 									rec_state := CreateError(ADR(RECIPE), ERR_SIZE_DATA_UPLOAD, "data end not found in upload response", rec_state);
 								END_IF
-								// Data start not found in upload response
+							// Data start not found in upload response
 							ELSE
 								rec_state := CreateError(ADR(RECIPE), ERR_POS_DATA_UPLOAD, "data start not found in upload response", rec_state);
 							END_IF
-							// File name is too long in upload response
+						// File name is too long in upload response
 						ELSE
 							rec_state := CreateError(ADR(RECIPE), ERR_LEN_NAME_UPLOAD, "file name is too long in upload response", rec_state);
 						END_IF
-						// File name end not found in upload response
+					// File name end not found in upload response
 					ELSE
 						rec_state := CreateError(ADR(RECIPE), ERR_SIZE_NAME_UPLOAD, "file name end not found in upload response", rec_state);
 					END_IF
-					// File name start not found in upload response
+				// File name start not found in upload response
 				ELSE
 					rec_state := CreateError(ADR(RECIPE), ERR_POS_NAME_UPLOAD, "file name position not found in upload response", rec_state);
 				END_IF
-				// Upload file exceeds maximum buffer size
+			// Upload file exceeds maximum buffer size
 			ELSE
 				tmpWStr1 := "upload file exceeds maximum buffer size of ";
 				brsitoa(REC_UPLOAD_DOWNLOAD_SIZE, ADR(tmpStr2));
@@ -1032,7 +1034,7 @@ PROGRAM _CYCLIC
 			// OK
 			IF (FCreate.status = OK) THEN
 				rec_state := REC_UPLOAD_5;
-				// Error
+			// Error
 			ELSIF (FCreate.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), FCreate.status, "error creating file from upload", rec_state);
 				// Reset upload buffer and function block
@@ -1060,7 +1062,7 @@ PROGRAM _CYCLIC
 			// OK
 			IF (FWrite.status = OK) THEN
 				rec_state := REC_UPLOAD_6;
-				// Error
+			// Error
 			ELSIF (FWrite.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), FWrite.status, "error writing file from upload", rec_state);
 			END_IF
@@ -1084,7 +1086,7 @@ PROGRAM _CYCLIC
 				RECIPE.CMD.Init := TRUE;
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].ReloadUpload := TRUE;
 				rec_state := REC_WAIT;
-				// Error
+			// Error
 			ELSIF (FClose.status <> ERR_FUB_BUSY) THEN
 				rec_state := CreateError(ADR(RECIPE), FClose.status, "error closing file from upload", rec_state);
 			END_IF			
