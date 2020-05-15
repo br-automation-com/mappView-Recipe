@@ -23,6 +23,8 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.7 
-- Fixed recipe view does not show correct data on double click or command view 
-- Fixed ReplaceString function call 
+#### Version 0.8
+* Changed some parameters to constants
+* Simplified configuration
+* Added better error messages
+* Added the possibility to define multiple variables
