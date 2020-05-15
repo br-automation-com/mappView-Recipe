@@ -28,7 +28,7 @@
         <Widget xsi:type="widgets.brease.ToggleButton" id="StatusInitialized" top="8" left="999" width="160" zIndex="0" mouseDownText="Initialized" text="Not Initialized" backGroundGradient="linear-gradient(to bottom,#F7F7F7 0%,#f60909 100%)" disabledBackGroundGradient="linear-gradient(to bottom,#F7F7F7 0%,#f60909 100%)" disabledTextColor="rgba(255, 255, 255, 1)" checkedBackGroundGradient="linear-gradient(to bottom, #4A4A4A 0%,#29920c 100%)" disabledCheckedBackGroundGradient="linear-gradient(to bottom, #4A4A4A 0%,#29920c 100%)" enable="false" style="Operate" />
         <Widget xsi:type="widgets.brease.TextOutput" id="txtRecErrorText" top="8" left="94" width="551" height="27" zIndex="1" borderWidth="1px" cornerRadius="5px" borderStyle="solid" padding="0px 5px 0px 5px" />
         <Widget xsi:type="widgets.brease.Label" id="labRecErrorNo" top="8" left="674" width="76" zIndex="2" text="Error No" textAlign="right" />
-        <Widget xsi:type="widgets.brease.NumericOutput" id="numRecErrorNo" top="8" left="754" width="151" height="27" zIndex="3" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" borderWidth="1px" cornerRadius="5px" padding="0px 5px 0px 5px" />
+        <Widget xsi:type="widgets.brease.NumericOutput" id="numRecErrorNo" top="8" left="754" width="151" height="27" zIndex="3" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1,'maximumIntegerDigits':12},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" borderWidth="1px" cornerRadius="5px" padding="0px 5px 0px 5px" />
         <Widget xsi:type="widgets.brease.Label" id="labRecPath" top="58" left="674" width="76" zIndex="4" text="Recipe ID" textAlign="right" />
         <Widget xsi:type="widgets.brease.TextOutput" id="txtRecPath" top="58" left="754" width="156" height="27" zIndex="5" borderWidth="1px" cornerRadius="5px" borderStyle="solid" textAlign="center" padding="0px 5px 0px 5px" />
         <Widget xsi:type="widgets.brease.TextOutput" id="txtRecID" top="58" left="924" width="241" height="27" zIndex="6" borderWidth="1px" cornerRadius="5px" borderStyle="solid" padding="0px 5px 0px 5px" />
@@ -39,7 +39,7 @@
       </Widgets>
     </Widget>
     <Widget xsi:type="widgets.brease.Button" id="btnRecClearFilter" top="205" left="430" width="30" zIndex="11" text="X" cornerRadius="5px" />
-    <Widget xsi:type="widgets.brease.GroupBox" id="grpRecDetails" top="155" left="675" width="515" height="230" zIndex="12" text="Sample Recipe Details">
+    <Widget xsi:type="widgets.brease.GroupBox" id="grpRecDetails" top="155" left="675" width="515" height="315" zIndex="12" text="Sample Recipe Data">
       <Widgets>
         <Widget xsi:type="widgets.brease.Label" id="labRecTemp1" top="23" left="84" width="150" height="17" zIndex="0" text="Temperature 1" textAlign="right" />
         <Widget xsi:type="widgets.brease.Label" id="labRecTemp2" top="63" left="84" width="150" height="17" zIndex="1" text="Temperature 2" textAlign="right" />
@@ -49,6 +49,10 @@
         <Widget xsi:type="widgets.brease.NumericInput" id="txtRecTemp2" top="53" left="244" width="109" zIndex="5" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" />
         <Widget xsi:type="widgets.brease.NumericInput" id="txtRecSpeed" top="93" left="244" width="109" zIndex="6" format="{'metric':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':0,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':0,'minimumIntegerDigits':1}}" />
         <Widget xsi:type="widgets.brease.NumericInput" id="txtRecPosition" top="133" left="244" width="109" zIndex="7" format="{'metric':{'decimalPlaces':2,'minimumIntegerDigits':1},'imperial':{'decimalPlaces':2,'minimumIntegerDigits':1},'imperial-us':{'decimalPlaces':2,'minimumIntegerDigits':1}}" />
+        <Widget xsi:type="widgets.brease.Label" id="labRecProduct" top="183" left="84" width="150" height="17" zIndex="8" text="Product" textAlign="right" />
+        <Widget xsi:type="widgets.brease.TextInput" id="txtRecProduct" top="173" left="244" width="231" zIndex="9" />
+        <Widget xsi:type="widgets.brease.Label" id="labRecCustomer" top="223" left="84" width="150" height="17" zIndex="10" text="Customer" textAlign="right" />
+        <Widget xsi:type="widgets.brease.TextInput" id="txtRecProduct1" top="213" left="244" width="231" zIndex="11" />
       </Widgets>
     </Widget>
     <Widget xsi:type="widgets.brease.FlyOut" id="flyViewFile" top="0" left="1" width="1198" height="500" zIndex="13" autoClose="true" docking="bottom" showButton="false" text="ViewFile" buttonWidth="100" buttonBorderWidth="0px" borderStyle="solid" borderWidth="1px" cornerRadius="5px" backColor="rgba(224, 224, 224, 1)">

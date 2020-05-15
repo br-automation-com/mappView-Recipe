@@ -141,7 +141,7 @@ PROGRAM _CYCLIC
 				brsmemset(ADR(RecipeIDs), 0, SIZEOF(RecipeIDs));
 				brsmemset(ADR(RecipeNumOld), 16#FF, SIZEOF(RecipeNumOld));
 				// Skip variable binding if already initialized
-				IF(MpRecipeRegPar_1.PVName <> 0) THEN
+				IF(MpRecipeRegPar_1[1].PVName <> 0) THEN
 					rec_state := REC_READ_DIR;
 				ELSE
 					// Register recipe name variable first if unicode is used
@@ -150,16 +150,16 @@ PROGRAM _CYCLIC
 					ELSE
 						rec_state := REC_REG_VAR;
 					END_IF
+					pvCnt := 1;
 				END_IF
-				MpRecipeRegPar_1.Enable := FALSE;
 			// ---------------------------------------------------------------------------------------- 
 			// Command new recipe
 			ELSIF (RECIPE.CMD.New = TRUE AND RECIPE.PAR.RecipeName <> "") THEN
 				// Show current state																		
 				animation := WorkingStatus(ADR(RECIPE), ADR("creating recipe..."), animation);
 				// Verify that we still have space in list												
-				IF (RECIPE.DAT.RecipeNum > REC_MAX_NUM) THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_MAX_NUM, "maximum number of recipes reached", rec_state);
+				IF (RECIPE.DAT.RecipeNum > REC_REC_NUM) THEN
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_REC_NUM, "maximum number of recipes reached", rec_state);
 					RETURN;
 				END_IF
 				// Make sure recipe does not already exist
@@ -170,8 +170,7 @@ PROGRAM _CYCLIC
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EXISTS, tmpWStr1, rec_state);
 					RETURN;
 				END_IF
-				// Turn on variable saving, reset selected recipe, copy recipe name to local variable
-				MpRecipeRegPar_1.Enable := TRUE;;				
+				// Reset selected recipe, copy recipe name to local variable
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := "";
 				rec_state := REC_GEN_FILE_NAME;
 			// ---------------------------------------------------------------------------------------- 
@@ -179,10 +178,9 @@ PROGRAM _CYCLIC
 			ELSIF (RECIPE.CMD.Load = TRUE AND RECIPE.PAR.RecipeName <> "") THEN
 				// Show current state																		
 				animation := WorkingStatus(ADR(RECIPE), ADR("loading recipe..."), animation);
-				// Turn on variable saving, copy recipe name to local variable
-				MpRecipeRegPar_1.Enable := TRUE;;				
+				// Copy recipe name to local variable
 				rec_state := REC_GEN_FILE_NAME;
-			// ---------------------------------------------------------------------------------------- 
+				// ---------------------------------------------------------------------------------------- 
 			// Command save recipe
 			ELSIF (RECIPE.CMD.Save = TRUE AND (RECIPE.PAR.RecipeName <> "" OR RECIPE.PAR.RecipeNameNew <> "")) THEN
 				// Show current state																		
@@ -190,8 +188,7 @@ PROGRAM _CYCLIC
 				IF(RECIPE.PAR.RecipeName = "") THEN
 					RECIPE.PAR.RecipeName := RECIPE.PAR.RecipeNameNew;
 				END_IF
-				// Turn on variable saving, copy recipe name to local variable
-				MpRecipeRegPar_1.Enable := TRUE;;
+				// Copy recipe name to local variable
 				rec_state := REC_GEN_FILE_NAME;
 			// ---------------------------------------------------------------------------------------- 
 			// Command view recipe
@@ -235,8 +232,7 @@ PROGRAM _CYCLIC
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EXISTS, tmpWStr1, rec_state);
 					RETURN;
 				END_IF
-				// Turn on variable saving, reset selected recipe, copy recipe name to local variable
-				MpRecipeRegPar_1.Enable := TRUE;
+				// Reset selected recipe, copy recipe name to local variable
 				brsmemset(ADR(RecipeNumOld), 16#FF, SIZEOF(RecipeNumOld));
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := "";
 				RecipeNameNew := RECIPE.PAR.RecipeNameNew;
@@ -260,11 +256,11 @@ PROGRAM _CYCLIC
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "new recipe name is empty", rec_state);
 				END_IF
 				// Make sure device name is valid
-				IF(RECIPE.PAR.DeviceName = '') THEN
+				IF(DeviceName = '') THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_DEV_NAME_EMPTY, "device name is empty", rec_state);
 				END_IF
-				// Make sure variable name is valid
-				IF(RECIPE.PAR.RecipeVariable = '') THEN
+				// Make sure variable name has at least one entry
+				IF(REC_VAR_LIST[1] = '') THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_VAR_NAME_EMPTY, "variable name is empty", rec_state);
 				END_IF
 
@@ -275,13 +271,13 @@ PROGRAM _CYCLIC
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_REG_NAME:
 			// Generate string for local recipe name
-			tmpStr1 := this;
+			tmpStr1 := REC_THIS_TASK;
 			brsstrcat(ADR(tmpStr1), ADR(':RecipeName'));
 			
 			MpRecipeRegPar_0.Enable := TRUE;
-			MpRecipeRegPar_0.MpLink := ADR(RECIPE.PAR.MpLink);
+			MpRecipeRegPar_0.MpLink := ADR(MpComGetLink_0.MpLink);
 			MpRecipeRegPar_0.PVName := ADR(tmpStr1);
-			MpRecipeRegPar_0.Category := ADR(this);
+			MpRecipeRegPar_0.Category := ADR(REC_THIS_TASK);
 										
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
@@ -295,28 +291,33 @@ PROGRAM _CYCLIC
 		// Register variable structure																
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_REG_VAR:
-			MpRecipeRegPar_1.MpLink := ADR(RECIPE.PAR.MpLink);
-			MpRecipeRegPar_1.PVName := ADR(RECIPE.PAR.RecipeVariable);	
-			MpRecipeRegPar_1.Category := ADR(this);
+			MpRecipeRegPar_1[pvCnt].Enable := TRUE;
+			MpRecipeRegPar_1[pvCnt].MpLink := ADR(MpComGetLink_0.MpLink);
+			MpRecipeRegPar_1[pvCnt].PVName := ADR(REC_VAR_LIST[pvCnt]);	
+			MpRecipeRegPar_1[pvCnt].Category := ADR(REC_THIS_TASK);
 										
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
-			IF (NOT MpRecipeRegPar_1.Active AND NOT MpRecipeRegPar_1.Error) THEN
-				rec_state := REC_CREATE_DIR;
+			IF (MpRecipeRegPar_1[pvCnt].Active AND NOT MpRecipeRegPar_1[pvCnt].Error) THEN
+				pvCnt := pvCnt + 1;
+				// Register next variable
+				IF((pvCnt >= SIZEOF(REC_VAR_LIST)/SIZEOF(REC_VAR_LIST[pvCnt])) OR (REC_VAR_LIST[pvCnt] = '')) THEN
+					rec_state := REC_CREATE_DIR;
+				END_IF
 			// Error
-			ELSIF (MpRecipeRegPar_1.Error) THEN
+			ELSIF (MpRecipeRegPar_1[pvCnt].Error) THEN
 				tmpWStr1 := "error trying to register variable name ";
-				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.RecipeVariable), brwU8toUC);
+				brwcsconv(ADR(tmpWStr2), ADR(REC_VAR_LIST[pvCnt]), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
-				rec_state := CreateError(ADR(RECIPE), MpRecipeRegPar_1.StatusID, tmpWStr1, rec_state);
+				rec_state := CreateError(ADR(RECIPE), MpRecipeRegPar_1[pvCnt].StatusID, tmpWStr1, rec_state);
 			END_IF	
 		// --------------------------------------------------------------------------------------------------------------------
 		// Create recipe directory																
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_CREATE_DIR:
 			DCreate.enable 	:= TRUE;
-			DCreate.pDevice	:= ADR(RECIPE.PAR.DeviceName);
-			DCreate.pName := ADR(RECIPE.PAR.RecipeDirectory);
+			DCreate.pDevice	:= ADR(DeviceName);
+			DCreate.pName := ADR(REC_DIRECTORY);
 			DCreate();
 										
 			// ---------------------------------------------------------------------------------------- 		
@@ -326,7 +327,12 @@ PROGRAM _CYCLIC
 				rec_state := REC_READ_DIR;
 			// Error 		
 			ELSIF (DCreate.status <> ERR_FUB_BUSY) THEN
-				rec_state := CreateError(ADR(RECIPE), DCreate.status, "error dir create", rec_state);
+				// File device is wrong
+				IF(DCreate.status = fiERR_DEVICE_MANAGER) THEN
+					rec_state := CreateError(ADR(RECIPE), DCreate.status, "error creating recipe directory, check file device name", rec_state);
+				ELSE
+					rec_state := CreateError(ADR(RECIPE), DCreate.status, "error creating recipe directory", rec_state);
+				END_IF			
 			END_IF			
 		// --------------------------------------------------------------------------------------------------------------------
 		// Read directory information																	
@@ -341,7 +347,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// Set values and get device dir															
 			DInfo.enable 	:= TRUE;
-			DInfo.pDevice	:= ADR(RECIPE.PAR.DeviceName);
+			DInfo.pDevice	:= ADR(DeviceName);
 			DInfo();
 						
 			// ---------------------------------------------------------------------------------------- 		
@@ -350,13 +356,13 @@ PROGRAM _CYCLIC
 				rec_state := REC_READ_DIR_1;
 			ELSIF (DInfo.status = fiERR_DEVICE_MANAGER) THEN
 				tmpWStr1 := "file device ";
-				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.DeviceName), brwU8toUC);
+				brwcsconv(ADR(tmpWStr2), ADR(DeviceName), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
 				brwcscat(ADR(tmpWStr1), ADR(" is unavailable"));
 				rec_state := CreateError(ADR(RECIPE), DInfo.status, tmpWStr1, rec_state);
 			ELSIF (DInfo.status = fiERR_DIR_NOT_EXIST) THEN
 				tmpWStr1 := "file ";
-				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.RecipeDirectory), brwU8toUC);
+				brwcsconv(ADR(tmpWStr2), ADR(REC_DIRECTORY), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
 				brwcscat(ADR(tmpWStr1), ADR(" is unavailable"));
 				rec_state := CreateError(ADR(RECIPE), DInfo.status, tmpWStr1, rec_state);
@@ -369,8 +375,8 @@ PROGRAM _CYCLIC
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_READ_DIR_1:														
 			DOpen.enable 	:= TRUE;
-			DOpen.pDevice	:= ADR(RECIPE.PAR.DeviceName);
-			DOpen.pName 	:= ADR(RECIPE.PAR.RecipeDirectory);
+			DOpen.pDevice	:= ADR(DeviceName);
+			DOpen.pName 	:= ADR(REC_DIRECTORY);
 			DOpen();
 						
 			// ---------------------------------------------------------------------------------------- 		
@@ -380,7 +386,7 @@ PROGRAM _CYCLIC
 			// Create error message for missing directory
 			ELSIF (DInfo.status = fiERR_DIR_NOT_EXIST) THEN
 				tmpWStr1 := "directory ";
-				brwcsconv(ADR(tmpWStr2), ADR(RECIPE.PAR.RecipeDirectory), brwU8toUC);
+				brwcsconv(ADR(tmpWStr2), ADR(REC_DIRECTORY), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
 				brwcscat(ADR(tmpWStr1), ADR(" is unavailable"));
 				rec_state := CreateError(ADR(RECIPE), DInfo.status, tmpWStr1, rec_state);				
@@ -412,7 +418,7 @@ PROGRAM _CYCLIC
 						brsmemset(ADR(RECIPE.PAR.RecipeID) + (brsstrlen(ADR(RECIPE.PAR.RecipeID)) - 4), 0, 4);
 						// ------------------------------------------------------------------------------------ 		
 						// Verify that we still have space in list												
-						IF (RECIPE.DAT.RecipeNum <= REC_MAX_NUM) THEN
+						IF (RECIPE.DAT.RecipeNum <= REC_REC_NUM) THEN
 							// -------------------------------------------------------------------- 		
 							// Read recipe name from recipe data in next rec_state when using unicode
 							IF(REC_USE_UNICODE) THEN
@@ -426,7 +432,7 @@ PROGRAM _CYCLIC
 							END_IF
 							// Error
 						ELSE
-							rec_state := CreateError(ADR(RECIPE), ERR_REC_MAX_NUM, "maximum number of recipes reached", rec_state);
+							rec_state := CreateError(ADR(RECIPE), ERR_REC_REC_NUM, "maximum number of recipes reached", rec_state);
 						END_IF
 					END_IF
 				ELSE
@@ -480,14 +486,14 @@ PROGRAM _CYCLIC
 					// Find empty slot for new recipe
 					IF(RECIPE.CMD.New) THEN
 						RecipeIndex := 0;
-						WHILE (RecipeIDs[RecipeIndex] = TRUE AND RecipeIndex <= REC_MAX_NUM) DO
+						WHILE (RecipeIDs[RecipeIndex] = TRUE AND RecipeIndex <= REC_REC_NUM) DO
 							RecipeIndex := RecipeIndex + 1;
 						END_WHILE;
 						// Make sure we found empty slot
-						IF(RecipeIndex <= REC_MAX_NUM AND RecipeIDs[RecipeIndex] = FALSE) THEN
+						IF(RecipeIndex <= REC_REC_NUM AND RecipeIDs[RecipeIndex] = FALSE) THEN
 							brsitoa(RecipeIndex, ADR(RECIPE.PAR.RecipeID));
 						ELSE
-							rec_state := CreateError(ADR(RECIPE), ERR_REC_MAX_NUM, "no empty slot found", rec_state);
+							rec_state := CreateError(ADR(RECIPE), ERR_REC_REC_NUM, "no empty slot found", rec_state);
 							RETURN;
 						END_IF
 						// Find recipe name in list	for all other command				
@@ -510,7 +516,7 @@ PROGRAM _CYCLIC
 			END_IF
 			
 			// Generate recipe path and extension
-			RecipeFullFileName := RECIPE.PAR.RecipeDirectory;
+			RecipeFullFileName := REC_DIRECTORY;
 			brsstrcat(ADR(RecipeFullFileName), ADR('/'));
 			brsstrcat(ADR(RecipeFullFileName), ADR(RECIPE.PAR.RecipeID));
 
@@ -545,10 +551,10 @@ PROGRAM _CYCLIC
 			
 			IF(REC_RECIPE_TYPE = typeCSV) THEN
 				MpRecipeCsv_0.Enable := TRUE;
-				MpRecipeCsv_0.MpLink := ADR(RECIPE.PAR.MpLink);
-				MpRecipeCsv_0.DeviceName := ADR(RECIPE.PAR.DeviceName);
+				MpRecipeCsv_0.MpLink := ADR(MpComGetLink_0.MpLink);
+				MpRecipeCsv_0.DeviceName := ADR(DeviceName);
 				MpRecipeCsv_0.FileName := ADR(RecipeFullFileName);
-				MpRecipeCsv_0.Category := ADR(this);
+				MpRecipeCsv_0.Category := ADR(REC_THIS_TASK);
 				MpRecipeCsv_0.Save := RECIPE.CMD.Save OR RECIPE.CMD.New OR RECIPE.CMD.Rename;
 				MpRecipeCsv_0.Load := RECIPE.CMD.Load OR RECIPE.CMD.Init;
 
@@ -557,10 +563,10 @@ PROGRAM _CYCLIC
 				MpRecipeStatusID := MpRecipeCsv_0.StatusID;
 			ELSE
 				MpRecipeXml_0.Enable := TRUE;
-				MpRecipeXml_0.MpLink := ADR(RECIPE.PAR.MpLink);
-				MpRecipeXml_0.DeviceName := ADR(RECIPE.PAR.DeviceName);
+				MpRecipeXml_0.MpLink := ADR(MpComGetLink_0.MpLink);
+				MpRecipeXml_0.DeviceName := ADR(DeviceName);
 				MpRecipeXml_0.FileName := ADR(RecipeFullFileName);
-				MpRecipeXml_0.Category := ADR(this);
+				MpRecipeXml_0.Category := ADR(REC_THIS_TASK);
 				MpRecipeXml_0.Save := RECIPE.CMD.Save OR RECIPE.CMD.New OR RECIPE.CMD.Rename;
 				MpRecipeXml_0.Load := RECIPE.CMD.Load OR RECIPE.CMD.Init;
 
@@ -623,6 +629,8 @@ PROGRAM _CYCLIC
 				CreateMessage(ADR(RECIPE.DAT.Status), ADR(tmpWStr1), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				rec_state := REC_WAIT;	
 			// Error		
+			ELSIF (MpRecipeStatusID = mpRECIPE_ERR_CONFIG_INVALID) THEN
+				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, "mapp configuration is invalid, check REC_MPLINK constant", rec_state);
 			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_LOAD_WITH_WARN) THEN
 				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, "warning recipe read/write/new, check PLC logbook for details", rec_state);
 			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_NO_PV_FOUND) THEN
@@ -642,7 +650,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
 			FDelete.enable		:= TRUE;
-			FDelete.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
+			FDelete.pDevice 	:= ADR(DeviceName);
 			FDelete.pName		:= ADR(RecipeFullFileName);
 			FDelete();
 										
@@ -670,7 +678,7 @@ PROGRAM _CYCLIC
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_RENAME:
 			// Generate recipe path and extension
-			tmpStr1 := RECIPE.PAR.RecipeDirectory;
+			tmpStr1 := REC_DIRECTORY;
 			brsstrcat(ADR(tmpStr1), ADR('/'));
 			brwcsconv(ADR(tmpStr2), ADR(RecipeNameNew), brwUCtoU8);
 			brsstrcat(ADR(tmpStr1), ADR(tmpStr2));
@@ -685,7 +693,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
 			FRename.enable		:= TRUE;
-			FRename.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
+			FRename.pDevice 	:= ADR(DeviceName);
 			FRename.pName		:= ADR(RecipeFullFileName);
 			FRename.pNewName	:= ADR(tmpStr1);
 			FRename();	
@@ -727,7 +735,7 @@ PROGRAM _CYCLIC
 						// Verify that file name contains filter											
 						IF(brsmemcmp(ADR(RecipeFullFileName) + brsstrlen(ADR(RecipeFullFileName)) - brsstrlen(ADR(REC_VIEW_FILTER[idx])) , ADR(REC_VIEW_FILTER[idx]), brsstrlen(ADR(REC_VIEW_FILTER[idx]))) = 0) THEN
 							RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath := '/FileDevice:';
-							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR(RECIPE.PAR.DeviceName));
+							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR(DeviceName));
 							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR("/"));
 							brsstrcat(ADR(RECIPE.VIS[RECIPE.PAR.VisuSlotID].ViewFilePath), ADR(RecipeFullFileName));
 							RECIPE.CMD.View := FALSE;
@@ -748,7 +756,7 @@ PROGRAM _CYCLIC
 			// ----------------------------------------------------------------------------------------
 			// Initialize file open structure
 			FOpen.enable	:= TRUE;
-			FOpen.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
+			FOpen.pDevice 	:= ADR(DeviceName);
 			FOpen.pFile		:= ADR(RecipeFullFileName);
 			FOpen();
 			
@@ -970,7 +978,7 @@ PROGRAM _CYCLIC
 			END_FOR;
 			
 			// Generate recipe path and extension
-			RecipeFullFileName := RECIPE.PAR.RecipeDirectory;
+			RecipeFullFileName := REC_DIRECTORY;
 			brsstrcat(ADR(RecipeFullFileName), ADR('/'));
 			brsstrcat(ADR(RecipeFullFileName), ADR(item_name));
 			rec_state := REC_UPLOAD_4;
@@ -982,7 +990,7 @@ PROGRAM _CYCLIC
 			IF(RECIPE.VIS[RECIPE.PAR.VisuSlotID].UploadOverwriteResponse = YES) THEN
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].UploadOverwriteRequest := FALSE;
 				// Generate recipe path and extension
-				RecipeFullFileName := RECIPE.PAR.RecipeDirectory;
+				RecipeFullFileName := REC_DIRECTORY;
 				brsstrcat(ADR(RecipeFullFileName), ADR('/'));
 				brsstrcat(ADR(RecipeFullFileName), ADR(item_name));
 			
@@ -1005,7 +1013,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// Initialize file delete structure 														
 			FDelete.enable		:= TRUE;
-			FDelete.pDevice 	:= ADR(RECIPE.PAR.DeviceName);
+			FDelete.pDevice 	:= ADR(DeviceName);
 			FDelete.pName		:= ADR(RecipeFullFileName);
 			FDelete();
 										
@@ -1026,7 +1034,7 @@ PROGRAM _CYCLIC
 			// ----------------------------------------------------------------------------------------
 			// Initialize file create structure
 			FCreate.enable	:= TRUE;
-			FCreate.pDevice := ADR(RECIPE.PAR.DeviceName);
+			FCreate.pDevice := ADR(DeviceName);
 			FCreate.pFile	:= ADR(RecipeFullFileName);
 			FCreate();
 			
@@ -1137,7 +1145,12 @@ PROGRAM _CYCLIC
 	// --------------------------------------------------------------------------------------------------------------------
 	// Cyclic function calls
 	MpRecipeRegPar_0();
-	MpRecipeRegPar_1();
+	FOR idx:=1 TO REC_VAR_NUM DO
+		MpRecipeRegPar_1[idx]();
+		IF(REC_VAR_LIST[idx] = '') THEN
+			EXIT;
+		END_IF
+	END_FOR;
 	MpRecipeCsv_0();
 	MpRecipeXml_0();
 

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <BindingsSet xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Recipe_binding">
 	<Bindings>
 		<Binding mode="twoWay">
@@ -13,22 +13,6 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.DAT.Status" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
 		</Binding>		
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Temperature1" attribute="node" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp1" attribute="node" />
-		</Binding>
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Temperature2" attribute="node" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp2" attribute="node" />
-		</Binding>
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.MotorSpeed" attribute="node" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecSpeed" attribute="node" />
-		</Binding>
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:RecipeData.Position" attribute="node" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPosition" attribute="node" />
-		</Binding>	
 		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeDirectory" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPath" attribute="value" />
@@ -69,6 +53,34 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecView" attribute="enable" />
 		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecDownload" attribute="enable" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:ProductID" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecProduct" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:CustomerID" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecProduct1" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:MaschineData.Temperature1" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp1" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:MaschineData.Temperature2" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecTemp2" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:MaschineData.MotorSpeed" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecSpeed" attribute="node" />
+		</Binding>
+		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::YourTask:MaschineData.Position" attribute="node" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPosition" attribute="node" />
+		</Binding>	
 	
 		<!-- Multiple bindings from mappView to PLC />-->
 		<Binding mode="oneWayToSource">
@@ -119,9 +131,5 @@
 			</Source>
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownloadRecipe" attribute="path" />
 		</Binding>
-	<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.VisuEnableCommand" attribute="value" />
-<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="btnRecDownload" attribute="enable" />
-</Binding>
-</Bindings>
+	</Bindings>
 </BindingsSet>

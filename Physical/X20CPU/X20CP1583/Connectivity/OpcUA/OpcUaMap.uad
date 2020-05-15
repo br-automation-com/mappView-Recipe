@@ -19,9 +19,18 @@
         <Variable Name="Recipe_01" AutomaticEnable="True">
           <Variable Name="VIS" EnableArrayElements="True" />
         </Variable>
-        <Variable Name="RecipeData" AutomaticEnable="True" />
       </GlobalVariables>
       <Task Name="Recipe_01" />
+      <Task Name="YourTask">
+        <Variable Name="CustomerID" />
+        <Variable Name="MaschineData" AutomaticEnable="True">
+          <Variable Name="Temperature1" />
+          <Variable Name="Temperature2" />
+          <Variable Name="MotorSpeed" />
+          <Variable Name="Position" />
+        </Variable>
+        <Variable Name="ProductID" />
+      </Task>
     </Module>
   </DefaultView>
 </OpcUaSource>

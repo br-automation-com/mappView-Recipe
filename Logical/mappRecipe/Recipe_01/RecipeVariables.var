@@ -10,7 +10,8 @@ END_VAR
 (*Local Variables*)
 VAR
 	RECIPE : REFERENCE TO recMAIN; (*Local recipe structure*)
-	RecipeIDs : ARRAY[0..REC_MAX_NUM] OF BOOL; (*Used with unicode option, keeps tracks of the IDs used*)
+	DeviceName : STRING[80];
+	RecipeIDs : ARRAY[0..REC_REC_NUM] OF BOOL; (*Used with unicode option, keeps tracks of the IDs used*)
 	RecipeIndex : UINT; (*Current recipe index*)
 	RecipeName : WSTRING[REC_NAME_LENGTH]; (*Local recipe name*)
 	RecipeNameNew : WSTRING[REC_NAME_LENGTH]; (*Local recipe new name*)
@@ -35,6 +36,7 @@ VAR
 	pvADR : UDINT; (*Adress of global variable structure*)
 	pvLEN : UDINT; (*Lenght of global variable structure*)
 	pvStatus : UINT; (*Status of global variable information*)
+	pvCnt : UINT;
 	MpRecipeDone : BOOL; (*Generic status done*)
 	MpRecipeError : BOOL; (*Genereic status error*)
 	MpRecipeStatusID : DINT; (*Generic error details*)
@@ -72,7 +74,8 @@ VAR
 	MpRecipeCsv_0 : MpRecipeCsv;
 	MpRecipeXml_0 : MpRecipeXml;
 	MpRecipeRegPar_0 : MpRecipeRegPar;
-	MpRecipeRegPar_1 : MpRecipeRegPar;
+	MpRecipeRegPar_1 : ARRAY[1..REC_VAR_NUM] OF MpRecipeRegPar;
+	MpComGetLink_0 : MpComGetLink;
 END_VAR
 (*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*)
 (*Error numbers*)
@@ -89,7 +92,7 @@ END_VAR
 VAR CONSTANT
 	ERR_REC_VAR_NAME_EMPTY : DINT := 50120; (*Variable name is empty*)
 	ERR_REC_NOT_INITIALIZED : DINT := 50130; (*Recipemanagement is not initialized*)
-	ERR_REC_MAX_NUM : DINT := 50140; (*Maximum number of recipes reached*)
+	ERR_REC_REC_NUM : DINT := 50140; (*Maximum number of recipes reached*)
 	ERR_REC_TASK_NAME : DINT := 50150; (*Task name is incorrect*)
 END_VAR
 VAR

@@ -3,10 +3,10 @@ PROGRAM _CYCLIC
 	// Create sample recipes
 	IF(cmd_create AND NOT Recipe_01.CMD.New AND Recipe_01.ERR.No = 0) THEN
 		idx := idx + 1;
-		RecipeData.Temperature1 := idx;
-		RecipeData.Temperature2 := idx;
-		RecipeData.Position := idx;
-		RecipeData.MotorSpeed := idx;
+		MaschineData.Temperature1 := idx;
+		MaschineData.Temperature2 := idx;
+		MaschineData.Position := idx;
+		MaschineData.MotorSpeed := idx;
 		
 		brsitoa(idx, ADR(tmpStr1));
 		tmpStr2 := 'recipe_';

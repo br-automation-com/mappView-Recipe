@@ -1,3 +1,9 @@
+Version 0.8
+- Changed some parameters to constants
+- Simplified configuration
+- Added better error messages
+- Added the possibility to define multiple variables
+
 Version 0.7
 - Fixed recipe view does not show correct data on double click or command view
 - Fixed ReplaceString function call
