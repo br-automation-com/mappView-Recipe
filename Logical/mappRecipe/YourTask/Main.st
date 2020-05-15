@@ -6,7 +6,7 @@ PROGRAM _INIT
 	MaschineData;
 	ProductID := 'Cookies';
 	CustomerID := 'B&R';
-	 
+	Recipe_01;
 END_PROGRAM
 
 PROGRAM _CYCLIC
