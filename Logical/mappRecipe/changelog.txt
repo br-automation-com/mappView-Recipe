@@ -1,3 +1,7 @@
+Version 0.9
+- Moved status text up to main strutcure
+- Moved error no up to main structure and renamed it to StatusNo
+
 Version 0.8
 - Changed some parameters to constants
 - Simplified configuration
