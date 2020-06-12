@@ -1,7 +1,5 @@
 // --------------------------------------------------------------------------------------------------------------------********
 //	Cylic task for recipe management
-//	Version 0.7
-//	Changed 08.05.2020
 // --------------------------------------------------------------------------------------------------------------------********
 
 // --------------------------------------------------------------------------------------------------------------------********
@@ -134,6 +132,12 @@ PROGRAM _CYCLIC
 			MpRecipeCsv_0.ErrorReset := FALSE;
 			MpRecipeXml_0.ErrorReset := FALSE;
 			MpRecipeRegPar_0.ErrorReset := FALSE;
+			FOR idx:=1 TO REC_VAR_NUM DO
+				MpRecipeRegPar_1[idx].ErrorReset := FALSE;
+				IF(REC_VAR_LIST[idx] = '') THEN
+					EXIT;
+				END_IF
+			END_FOR;
 
 			// ---------------------------------------------------------------------------------------- 
 			// Command init/refresh																			
@@ -1135,6 +1139,12 @@ PROGRAM _CYCLIC
 				MpRecipeXml_0.Load := FALSE;
 				
 				MpRecipeRegPar_0.ErrorReset := TRUE;
+				FOR idx:=1 TO REC_VAR_NUM DO
+					MpRecipeRegPar_1[idx].ErrorReset := TRUE;
+					IF(REC_VAR_LIST[idx] = '') THEN
+						EXIT;
+					END_IF
+				END_FOR;
 				
 				// Reset error structure
 				brsmemset(ADR(RECIPE.ERR), 0, SIZEOF(RECIPE.ERR));
