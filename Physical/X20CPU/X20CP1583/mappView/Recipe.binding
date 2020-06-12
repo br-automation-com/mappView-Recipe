@@ -2,10 +2,6 @@
 <BindingsSet xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Recipe_binding">
 	<Bindings>
 		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.No" attribute="value" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecErrorNo" attribute="value" />
-		</Binding>
-		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.Text" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecErrorText" attribute="value" />
 		</Binding>
@@ -131,6 +127,10 @@
 	<Binding mode="twoWay">
 <Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusText" attribute="value" />
 <Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
+</Binding>
+<Binding mode="oneWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusNo" attribute="value" />
+<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecStatusNo" attribute="value" />
 </Binding>
 </Bindings>
 </BindingsSet>

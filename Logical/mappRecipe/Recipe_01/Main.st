@@ -68,6 +68,8 @@ PROGRAM _CYCLIC
 		// Wait for command																				
 		// --------------------------------------------------------------------------------------------------------------------
 		REC_WAIT:
+			// Set OK state
+			RECIPE.StatusNo := ERR_OK;
 			// --------------------------------------------------------------------------------------------------------------------
 			// Track filter change and data refresh																				
 			IF ((brwcscmp(ADR(RecipeFilterOld[VisuSlotID]), ADR(RECIPE.VIS[VisuSlotID].RecipeFilter)) <> 0) OR (RecipeNumOld[VisuSlotID] <> RECIPE.DAT.RecipeNum)) THEN
@@ -242,7 +244,9 @@ PROGRAM _CYCLIC
 
 			// ---------------------------------------------------------------------------------------- 
 			// Check parameters																					
-			IF (RECIPE.CMD.Init OR RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete OR RECIPE.CMD.View) THEN
+			IF (RECIPE.CMD.Init OR RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete OR RECIPE.CMD.View OR RECIPE.CMD.Download OR RECIPE.CMD.Upload) THEN
+				// Set busy state
+				RECIPE.StatusNo := ERR_FUB_BUSY;
 				// Make sure recipe mangament was intialized
 				IF (NOT RECIPE.CMD.Init AND NOT RECIPE.PAR.Initialized) THEN
 					rec_state := CreateError(ADR(RECIPE), ERR_REC_NOT_INITIALIZED, "recipe management is not initiialized", rec_state);

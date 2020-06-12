@@ -44,7 +44,6 @@ END_TYPE
 TYPE
 	recERR : 	STRUCT  (*Recipe management error structure*)
 		Text : WSTRING[200]; (* Error text *)
-		No : DINT; (* Error number *)
 		State : recSTATE; (* Error step *)
 	END_STRUCT;
 	recCMD : 	STRUCT  (*Recipe management command structure*)
@@ -93,5 +92,6 @@ TYPE
 		VIS : ARRAY[0..REC_MAX_CLIENTS_ID]OF recVIS; (*Visualization structure*)
 		ERR : recERR; (* Error structure *)
 		StatusText : WSTRING[100]; (*Shows the result of the last command*)
+		StatusNo : DINT; (* Error number *)
 	END_STRUCT;
 END_TYPE

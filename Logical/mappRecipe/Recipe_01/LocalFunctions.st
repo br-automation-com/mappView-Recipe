@@ -31,7 +31,7 @@ END_FUNCTION
 // Create error
 //******************************************************************************************************
 FUNCTION CreateError
-	RECIPE.ERR.No := No;
+	RECIPE.StatusNo := No;
 	RECIPE.ERR.State := State;
 	RECIPE.ERR.Text := Text;
 	CreateError := REC_ERROR;
