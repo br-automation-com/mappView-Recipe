@@ -29,7 +29,6 @@ VAR
 	tmpWStr1 : WSTRING[REC_VIS_LENGTH]; (*Temporary unicode string variable *)
 	tmpWStr2 : WSTRING[REC_VIS_LENGTH]; (*Temporary unicode string variable *)
 	lDirReadData : fiDIR_READ_EX_DATA; (*File information structure*)
-	this : STRING[100]; (*Name of the task and global recipe structure*)
 	taskID : UDINT; (*Task ID*)
 	taskGroup : USINT; (*Task Group*)
 	taskStatus : UINT; (*Status of task information*)

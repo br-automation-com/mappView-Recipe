@@ -323,7 +323,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
 			IF (DCreate.status = OK OR DCreate.status = fiERR_DIR_ALREADY_EXIST) THEN
-				// Reset command and return to wait state												
+				// Reset command and RETURN to wait state												
 				rec_state := REC_READ_DIR;
 			// Error 		
 			ELSIF (DCreate.status <> ERR_FUB_BUSY) THEN
@@ -456,7 +456,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
 			IF (DClose.status = OK) THEN
-				// Reset command and return to wait state												
+				// Reset command and RETURN to wait state												
 				RECIPE.DAT.Status := "initializing complete";
 				RECIPE.CMD.Init	:= FALSE;
 				RECIPE.PAR.RecipeID := '';
@@ -578,7 +578,7 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
 			IF (MpRecipeDone AND NOT MpRecipeError AND MpRecipeStatusID = 0) THEN
-				// Reset command and return to wait state
+				// Reset command and RETURN to wait state
 				MpRecipeCsv_0.Load := FALSE;
 				MpRecipeCsv_0.Save := FALSE;
 				MpRecipeXml_0.Load := FALSE;
