@@ -18,14 +18,6 @@ PROGRAM _INIT
 	// ---------------------------------------------------------------------------------------- 
 
 	// ---------------------------------------------------------------------------------------- 
-	// Get mapp link information
-	MpComGetLink_0.Enable := TRUE;
-	MpComGetLink_0.ComponentName := ADR(REC_MPLINK);
-	MpComGetLink_0();
-	IF(MpComGetLink_0.Error) THEN
-	END_IF
-
-	// ---------------------------------------------------------------------------------------- 
 	// Make sure global variable structure and task name are correct
 	taskStatus := ST_ident(ADR(REC_THIS_TASK), taskGroup, ADR(taskID));
 	pvStatus := PV_xgetadr(ADR(REC_THIS_TASK), ADR(pvADR), ADR(pvLEN));
@@ -35,7 +27,17 @@ PROGRAM _INIT
 		brsmemset(ADR(RECIPE.ERR), 0 , SIZEOF(RECIPE.ERR));
 		RECIPE.PAR.Initialized := FALSE;
 	END_IF
-	
+
+	// ---------------------------------------------------------------------------------------- 
+	// Get mapp link information
+	MpComGetLink_0.Enable := TRUE;
+	MpComGetLink_0.ComponentName := ADR(REC_MPLINK);
+	MpComGetLink_0();
+	// Create error
+	IF(MpComGetLink_0.Error) THEN
+		rec_state := CreateError(ADR(RECIPE), ERR_REC_MPLINK, "mplink name is incorrect", rec_state);
+	END_IF
+
 	// ----------------------------------------------------------------------------------------
 	// Allocate memory for file upload and download
 	AsMemPartCreate_0.enable	:= TRUE;
