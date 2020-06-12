@@ -1,11 +1,10 @@
-Next Version (12.06.2020)
+Version 0.91 (12.06.2020)
 - Wrong MpLink name now generates an error
-
-Version 0.9
 - Moved status text up to main strutcure
 - Moved error no up to main structure and renamed it to StatusNo
+- Better recovering from errors
 
-Version 0.8
+Version 0.81
 - Changed some parameters to constants
 - Simplified configuration
 - Added better error messages

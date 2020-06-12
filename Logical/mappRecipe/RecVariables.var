@@ -6,7 +6,7 @@ VAR CONSTANT
 	REC_RECIPE_TYPE : recTYPE := typeCSV; (*Type of recipe (CSV / XML)*)
 END_VAR
 VAR
-	REC_MPLINK : {REDUND_UNREPLICABLE} STRING[80] := 'gRecipeCsv_1'; (*mappRecipe link name from configuration view. User gRecipeCsv_01 for CSV and gRecipeXml_01 for XML in this demo*)
+	REC_MPLINK : {REDUND_UNREPLICABLE} STRING[80] := 'gRecipeCsv_01'; (*mappRecipe link name from configuration view. User gRecipeCsv_01 for CSV and gRecipeXml_01 for XML in this demo*)
 END_VAR
 VAR CONSTANT
 	REC_DEVICE : STRING[80] := 'RECIPE_DEVICE'; (*Device name for the recipe data defined under File Devices in the CPU configuration*)

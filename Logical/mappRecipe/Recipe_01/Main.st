@@ -128,36 +128,19 @@ PROGRAM _CYCLIC
 			END_IF
 							
 			// ---------------------------------------------------------------------------------------- 
-			// Reset error reset
-			MpRecipeCsv_0.ErrorReset := FALSE;
-			MpRecipeXml_0.ErrorReset := FALSE;
-			MpRecipeRegPar_0.ErrorReset := FALSE;
-			FOR idx:=1 TO REC_VAR_NUM DO
-				MpRecipeRegPar_1[idx].ErrorReset := FALSE;
-				IF(REC_VAR_LIST[idx] = '') THEN
-					EXIT;
-				END_IF
-			END_FOR;
-
-			// ---------------------------------------------------------------------------------------- 
 			// Command init/refresh																			
 			IF (RECIPE.CMD.Init = TRUE) THEN
 				// Reset data structure and trigger name refresh for vis
 				brsmemset(ADR(RECIPE.DAT), 0, SIZEOF(RECIPE.DAT));
 				brsmemset(ADR(RecipeIDs), 0, SIZEOF(RecipeIDs));
 				brsmemset(ADR(RecipeNumOld), 16#FF, SIZEOF(RecipeNumOld));
-				// Skip variable binding if already initialized
-				IF(MpRecipeRegPar_1[1].PVName <> 0) THEN
-					rec_state := REC_READ_DIR;
+				// Register recipe name variable first if unicode is used
+				IF(REC_USE_UNICODE) THEN
+					rec_state := REC_REG_NAME;
 				ELSE
-					// Register recipe name variable first if unicode is used
-					IF(REC_USE_UNICODE) THEN
-						rec_state := REC_REG_NAME;
-					ELSE
-						rec_state := REC_REG_VAR;
-					END_IF
-					pvCnt := 1;
+					rec_state := REC_REG_VAR;
 				END_IF
+				pvCnt := 1;
 			// ---------------------------------------------------------------------------------------- 
 			// Command new recipe
 			ELSIF (RECIPE.CMD.New = TRUE AND RECIPE.PAR.RecipeName <> "") THEN
@@ -289,7 +272,7 @@ PROGRAM _CYCLIC
 										
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
-			IF (NOT MpRecipeRegPar_0.Active AND NOT MpRecipeRegPar_0.Error) THEN
+			IF (MpRecipeRegPar_0.Active AND NOT MpRecipeRegPar_0.Error) THEN
 				rec_state := REC_REG_VAR;
 			// Error
 			ELSIF (MpRecipeRegPar_0.Error) THEN
@@ -1130,17 +1113,17 @@ PROGRAM _CYCLIC
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].UploadOverwriteRequest := FALSE;
 				
 				// Reset function blocks
-				MpRecipeCsv_0.ErrorReset := TRUE;
+				MpRecipeCsv_0.Enable := FALSE;
 				MpRecipeCsv_0.Save := FALSE;
 				MpRecipeCsv_0.Load := FALSE;
 				
-				MpRecipeXml_0.ErrorReset := TRUE;
+				MpRecipeXml_0.Enable := FALSE;
 				MpRecipeXml_0.Save := FALSE;
 				MpRecipeXml_0.Load := FALSE;
 				
-				MpRecipeRegPar_0.ErrorReset := TRUE;
+				MpRecipeRegPar_0.Enable := FALSE;
 				FOR idx:=1 TO REC_VAR_NUM DO
-					MpRecipeRegPar_1[idx].ErrorReset := TRUE;
+					MpRecipeRegPar_1[idx].Enable := FALSE;
 					IF(REC_VAR_LIST[idx] = '') THEN
 						EXIT;
 					END_IF
@@ -1154,7 +1137,6 @@ PROGRAM _CYCLIC
 				rec_state := REC_WAIT;
 			END_IF;	
 			brsmemset(ADR(RECIPE.CMD), 0, SIZEOF(RECIPE.CMD));
-			RETURN;
 	END_CASE
 	// --------------------------------------------------------------------------------------------------------------------
 	// Cyclic function calls
