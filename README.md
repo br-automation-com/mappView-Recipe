@@ -23,7 +23,7 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.9
+#### Version 0.91
 - Wrong MpLink name now generates an error
 - Moved status text up to main strutcure
 - Moved error no up to main structure and renamed it to StatusNo
