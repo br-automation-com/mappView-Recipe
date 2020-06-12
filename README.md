@@ -24,6 +24,8 @@ Recommended task class is #8 with a 10ms cycle time.
 ## Revision History
 
 #### Version 0.9
+- Wrong MpLink name now generates an error
 - Moved status text up to main strutcure
 - Moved error no up to main structure and renamed it to StatusNo
+- Better recovering from errors
 
