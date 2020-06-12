@@ -9,10 +9,7 @@
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.Text" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecErrorText" attribute="value" />
 		</Binding>
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.DAT.Status" attribute="value" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
-		</Binding>		
+				
 		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeDirectory" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPath" attribute="value" />
@@ -131,5 +128,9 @@
 			</Source>
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownloadRecipe" attribute="path" />
 		</Binding>
-	</Bindings>
+	<Binding mode="twoWay">
+<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusText" attribute="value" />
+<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
+</Binding>
+</Bindings>
 </BindingsSet>

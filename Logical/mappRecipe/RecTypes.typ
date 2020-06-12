@@ -71,7 +71,6 @@ TYPE
 		RecipeNames : ARRAY[0..REC_REC_NUM]OF WSTRING[REC_NAME_LENGTH]; (*Recipe unicode names*)
 		RecipeIDs : ARRAY[0..REC_REC_NUM]OF STRING[REC_NAME_LENGTH]; (*File name of the recipes*)
 		RecipeNum : UINT; (*Number of recipes*)
-		Status : WSTRING[100]; (*Shows the result of the last command*)
 	END_STRUCT;
 	recVIS : 	STRUCT  (*Recipe management visualization structure*)
 		RecipeNames : ARRAY[0..REC_REC_NUM]OF WSTRING[REC_VIS_LENGTH]; (*Recipe names as mappView data provider*)
@@ -93,5 +92,6 @@ TYPE
 		DAT : recDAT; (*Data structure*)
 		VIS : ARRAY[0..REC_MAX_CLIENTS_ID]OF recVIS; (*Visualization structure*)
 		ERR : recERR; (* Error structure *)
+		StatusText : WSTRING[100]; (*Shows the result of the last command*)
 	END_STRUCT;
 END_TYPE

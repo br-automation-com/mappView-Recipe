@@ -457,7 +457,7 @@ PROGRAM _CYCLIC
 			// OK																																				
 			IF (DClose.status = OK) THEN
 				// Reset command and RETURN to wait state												
-				RECIPE.DAT.Status := "initializing complete";
+				RECIPE.StatusText := "initializing complete";
 				RECIPE.CMD.Init	:= FALSE;
 				RECIPE.PAR.RecipeID := '';
 				RECIPE.PAR.Initialized := TRUE;
@@ -626,7 +626,7 @@ PROGRAM _CYCLIC
 					RECIPE.CMD.Save	:= FALSE;
 				END_IF
 				// Complete status string
-				CreateMessage(ADR(RECIPE.DAT.Status), ADR(tmpWStr1), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
+				CreateMessage(ADR(RECIPE.StatusText), ADR(tmpWStr1), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				rec_state := REC_WAIT;	
 			// Error		
 			ELSIF (MpRecipeStatusID = mpRECIPE_ERR_CONFIG_INVALID) THEN
@@ -664,7 +664,7 @@ PROGRAM _CYCLIC
 					RecipeIDs[brsatoi(ADR(RECIPE.PAR.RecipeID))] := FALSE;
 				END_IF
 				
-				CreateMessage(ADR(RECIPE.DAT.Status), ADR("deleted recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
+				CreateMessage(ADR(RECIPE.StatusText), ADR("deleted recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.CMD.Delete := 0;
 				rec_state := REC_WAIT;
 			// Error 		
@@ -715,7 +715,7 @@ PROGRAM _CYCLIC
 				END_IF
 
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := RecipeNameNew;
-				CreateMessage(ADR(RECIPE.DAT.Status), ADR("renamed recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
+				CreateMessage(ADR(RECIPE.StatusText), ADR("renamed recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.CMD.Rename := FALSE;
 				rec_state := REC_WAIT;
 			// Error 		
@@ -745,7 +745,7 @@ PROGRAM _CYCLIC
 						END_IF
 					END_IF
 				END_FOR;
-				RECIPE.DAT.Status := "error this file extension is not supported for viewing";
+				RECIPE.StatusText := "error this file extension is not supported for viewing";
 				RECIPE.CMD.View := FALSE;
 				rec_state := REC_WAIT;
 			END_IF			
@@ -889,7 +889,7 @@ PROGRAM _CYCLIC
 			// ----------------------------------------------------------------------------------------
 			// Start sending data
 			IF (WebserviceDownload.phase = httpPHASE_WAITING) THEN 
-				CreateMessage(ADR(RECIPE.DAT.Status), ADR("downloaded recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
+				CreateMessage(ADR(RECIPE.StatusText), ADR("downloaded recipe"), ADR(RecipeName), RECIPE.PAR.VisuSlotID);
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].DownloadFileUrl := '';
 				WebserviceDownload.send := FALSE;
 				RECIPE.CMD.Download := FALSE;
@@ -1102,9 +1102,9 @@ PROGRAM _CYCLIC
 		// Error 
 		// --------------------------------------------------------------------------------------------------------------------					
 		REC_ERROR:
-			RECIPE.DAT.Status := "error state triggered on web client ID ";
+			RECIPE.StatusText := "error state triggered on web client ID ";
 			tmpWStr1 := DINT_TO_WSTRING(RECIPE.PAR.VisuSlotID);
-			brwcscat(ADR(RECIPE.DAT.Status), ADR(tmpWStr1));
+			brwcscat(ADR(RECIPE.StatusText), ADR(tmpWStr1));
 			// --------------------------------------------------------------------------------------------------------------------											
 			// Make sure we dont exceed maximum number of web clients
 			IF(RECIPE.PAR.VisuSlotID <= REC_MAX_CLIENTS_ID) THEN
@@ -1134,7 +1134,7 @@ PROGRAM _CYCLIC
 				
 				// Reset error structure
 				brsmemset(ADR(RECIPE.ERR), 0, SIZEOF(RECIPE.ERR));
-				RECIPE.DAT.Status := "";
+				RECIPE.StatusText := "";
 				RECIPE.CMD.ErrorReset := FALSE;
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].ShowMessageBoxError := FALSE;
 				rec_state := REC_WAIT;

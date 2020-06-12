@@ -62,13 +62,13 @@ FUNCTION WorkingStatus
 		animation := 0;
 	END_IF
 
-	brsmemset(ADR(RECIPE.DAT.Status), 0, SIZEOF(RECIPE.DAT.Status));
-	brwcscpy(ADR(RECIPE.DAT.Status), str);
+	brsmemset(ADR(RECIPE.StatusText), 0, SIZEOF(RECIPE.StatusText));
+	brwcscpy(ADR(RECIPE.StatusText), str);
 	CASE(animation) OF
-		0..19	: brwcscat(ADR(RECIPE.DAT.Status), ADR("/"));
-		20..39	: brwcscat(ADR(RECIPE.DAT.Status), ADR("-"));
-		40..59	: brwcscat(ADR(RECIPE.DAT.Status), ADR("\"));
-		60..79	: brwcscat(ADR(RECIPE.DAT.Status), ADR("|"));
+		0..19	: brwcscat(ADR(RECIPE.StatusText), ADR("/"));
+		20..39	: brwcscat(ADR(RECIPE.StatusText), ADR("-"));
+		40..59	: brwcscat(ADR(RECIPE.StatusText), ADR("\"));
+		60..79	: brwcscat(ADR(RECIPE.StatusText), ADR("|"));
 	END_CASE;
 	WorkingStatus := animation;
 END_FUNCTION
