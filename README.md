@@ -23,8 +23,7 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.8
-* Changed some parameters to constants
-* Simplified configuration
-* Added better error messages
-* Added the possibility to define multiple variables
+#### Version 0.9
+- Moved status text up to main strutcure
+- Moved error no up to main structure and renamed it to StatusNo
+
