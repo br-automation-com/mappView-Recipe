@@ -10,7 +10,7 @@ END_VAR
 (*Local Variables*)
 VAR
 	RECIPE : REFERENCE TO recMAIN; (*Local recipe structure*)
-	DeviceName : STRING[80];
+	DeviceName : STRING[80]; (*Device name where the recipes are stored*)
 	RecipeIDs : ARRAY[0..REC_REC_NUM] OF BOOL; (*Used with unicode option, keeps tracks of the IDs used*)
 	RecipeIndex : UINT; (*Current recipe index*)
 	RecipeName : WSTRING[REC_NAME_LENGTH]; (*Local recipe name*)
@@ -35,7 +35,7 @@ VAR
 	pvADR : UDINT; (*Adress of global variable structure*)
 	pvLEN : UDINT; (*Lenght of global variable structure*)
 	pvStatus : UINT; (*Status of global variable information*)
-	pvCnt : UINT;
+	pvCnt : UINT; (*Counter for variable registration*)
 	MpRecipeDone : BOOL; (*Generic status done*)
 	MpRecipeError : BOOL; (*Genereic status error*)
 	MpRecipeStatusID : DINT; (*Generic error details*)

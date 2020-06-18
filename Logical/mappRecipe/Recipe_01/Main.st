@@ -227,6 +227,11 @@ PROGRAM _CYCLIC
 				RecipeNameNew := RECIPE.PAR.RecipeNameNew;
 				rec_state := REC_GEN_FILE_NAME;
 			END_IF
+			// ---------------------------------------------------------------------------------------- 
+			// Reset error
+			ELSIF (RECIPE.CMD.ErrorReset = TRUE) THEN
+				rec_state := REC_ERROR;				
+			END_IF			
 			RecipeName := RECIPE.PAR.RecipeName;
 
 			// ---------------------------------------------------------------------------------------- 
