@@ -226,7 +226,6 @@ PROGRAM _CYCLIC
 				RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := "";
 				RecipeNameNew := RECIPE.PAR.RecipeNameNew;
 				rec_state := REC_GEN_FILE_NAME;
-			END_IF
 			// ---------------------------------------------------------------------------------------- 
 			// Reset error
 			ELSIF (RECIPE.CMD.ErrorReset = TRUE) THEN
@@ -241,23 +240,23 @@ PROGRAM _CYCLIC
 				RECIPE.StatusNo := ERR_FUB_BUSY;
 				// Make sure recipe mangament was intialized
 				IF (NOT RECIPE.CMD.Init AND NOT RECIPE.PAR.Initialized) THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_NOT_INITIALIZED, "recipe management is not initiialized", rec_state);
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_NOT_INITIALIZED, "recipe management is not initiialized", REC_WAIT);
 				END_IF
 				// Make sure recipe name is valid
 				IF((RECIPE.CMD.New OR RECIPE.CMD.Load OR RECIPE.CMD.Save OR RECIPE.CMD.Rename OR RECIPE.CMD.Delete OR RECIPE.CMD.View) AND RecipeName = "") THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "recipe name is empty", rec_state);
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "recipe name is empty", REC_WAIT);
 				END_IF
 				// Make sure new recipe name is valid
 				IF((RECIPE.CMD.Rename) AND RecipeNameNew = "") THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "new recipe name is empty", rec_state);
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_NAME_EMPTY, "new recipe name is empty", REC_WAIT);
 				END_IF
 				// Make sure device name is valid
 				IF(DeviceName = '') THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_DEV_NAME_EMPTY, "device name is empty", rec_state);
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_DEV_NAME_EMPTY, "device name is empty", REC_WAIT);
 				END_IF
 				// Make sure variable name has at least one entry
 				IF(REC_VAR_LIST[1] = '') THEN
-					rec_state := CreateError(ADR(RECIPE), ERR_REC_VAR_NAME_EMPTY, "variable name is empty", rec_state);
+					rec_state := CreateError(ADR(RECIPE), ERR_REC_VAR_NAME_EMPTY, "variable name is empty", REC_WAIT);
 				END_IF
 
 				RECIPE.PAR.VisuEnableCommand := FALSE;

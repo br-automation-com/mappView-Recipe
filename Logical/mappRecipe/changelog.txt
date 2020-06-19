@@ -1,3 +1,7 @@
+Version Next (19.06.2020)
+- Reset error in wait state
+- Errors in the wait state report the wrong trigger state
+
 Version 0.91 (12.06.2020)
 - Wrong MpLink name now generates an error
 - Moved status text up to main strutcure
