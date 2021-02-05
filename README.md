@@ -23,9 +23,8 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 0.91
-- Wrong MpLink name now generates an error
-- Moved status text up to main strutcure
-- Moved error no up to main structure and renamed it to StatusNo
-- Better recovering from errors
+#### Version 1.0 (05.02.2021)
+- Fixed memory violation when file exceeds download buffer size
+- Reset error in wait state
+- Errors in the wait state report the wrong trigger state
 
