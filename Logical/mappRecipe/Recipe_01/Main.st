@@ -769,8 +769,9 @@ PROGRAM _CYCLIC
 				ELSE
 					tmpWStr1 := "download file exceeds maximum buffer size of ";
 					brsitoa(REC_UPLOAD_DOWNLOAD_SIZE, ADR(tmpStr2));
-					brsstrcat(ADR(tmpWStr1), ADR(tmpWStr2));
-					brsstrcat(ADR(tmpWStr1), ADR(" bytes"));				
+					brwcsconv(ADR(tmpWStr2),ADR(tmpStr2), brwU8toUC);
+					brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
+					brwcscat(ADR(tmpWStr1), ADR(" bytes"));				
 					rec_state := CreateError(ADR(RECIPE), ERR_MEM_DOWNLOAD, tmpWStr1, rec_state);
 				END_IF;
 			// Error
@@ -944,8 +945,9 @@ PROGRAM _CYCLIC
 			ELSE
 				tmpWStr1 := "upload file exceeds maximum buffer size of ";
 				brsitoa(REC_UPLOAD_DOWNLOAD_SIZE, ADR(tmpStr2));
-				brsstrcat(ADR(tmpWStr1), ADR(tmpWStr2));
-				brsstrcat(ADR(tmpWStr1), ADR(" bytes"));
+				brwcsconv(ADR(tmpWStr2),ADR(tmpStr2), brwU8toUC);
+				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
+				brwcscat(ADR(tmpWStr1), ADR(" bytes"));
 				rec_state := CreateError(ADR(RECIPE), ERR_MEM_UPLOAD, tmpWStr1, rec_state);
 			END_IF
 			// Reset upload buffer and function block

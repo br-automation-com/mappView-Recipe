@@ -1,4 +1,5 @@
-Version Next (19.06.2020)
+Version 1.0 (05.02.2021)
+- Fixed memory violation when file exceeds download buffer size
 - Reset error in wait state
 - Errors in the wait state report the wrong trigger state
 
