@@ -23,8 +23,6 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 1.0 (05.02.2021)
-- Fixed memory violation when file exceeds download buffer size
-- Reset error in wait state
-- Errors in the wait state report the wrong trigger state
+#### Version 1.1 (01.04.2021)
+- Fixed upload file name can exceed REC_ITEM_LENGTH
 
