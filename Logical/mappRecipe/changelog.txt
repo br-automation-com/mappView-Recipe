@@ -1,3 +1,6 @@
+Version 1.2 (15.04.2021)
+- Fixed PLC crash when REC_VAR_NUM is 1
+
 Version 1.1 (01.04.2021)
 - Fixed upload file name can exceed REC_ITEM_LENGTH
 

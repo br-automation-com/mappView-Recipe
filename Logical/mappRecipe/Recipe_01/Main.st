@@ -294,9 +294,14 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
 			IF (MpRecipeRegPar_1[pvCnt].Active AND NOT MpRecipeRegPar_1[pvCnt].Error) THEN
-				pvCnt := pvCnt + 1;
 				// Register next variable
-				IF((pvCnt >= SIZEOF(REC_VAR_LIST)/SIZEOF(REC_VAR_LIST[pvCnt])) OR (REC_VAR_LIST[pvCnt] = '')) THEN
+				IF (pvCnt < SIZEOF(REC_VAR_LIST)/SIZEOF(REC_VAR_LIST[1]))  THEN
+					pvCnt := pvCnt + 1;
+					// Finish when variable data is empty
+					IF (REC_VAR_LIST[pvCnt] = '') THEN
+						rec_state := REC_CREATE_DIR;
+					END_IF
+				ELSE
 					rec_state := REC_CREATE_DIR;
 				END_IF
 			// Error
