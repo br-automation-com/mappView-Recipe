@@ -23,6 +23,6 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 1.1 (01.04.2021)
-- Fixed upload file name can exceed REC_ITEM_LENGTH
+#### Version 1.2 (15.04.2021)
+- Fixed PLC crash when REC_VAR_NUM is 1
 
