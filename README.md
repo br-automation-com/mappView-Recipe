@@ -13,16 +13,17 @@ Also see [**How to import the user management into an existing project.**](/Logi
 
 <a name="Requirements"></a>
 ## Requirements
-* Automation Studio 4.5
-* mappView 5.71
-* mappServices 5.71
-* Automation Runtime B4.53
+* Automation Studio 4.9
+* mappView 5.15
+* mappServices 5.15
+* Automation Runtime C4.90
 
 Recommended task class is #8 with a 10ms cycle time.
 
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 1.2 (15.04.2021)
-- Fixed PLC crash when REC_VAR_NUM is 1
+#### Version 1.3 (03.09.2021)
+- Update project to Automation Studio 4.9 and mapp 5.15
+- Fixed an issue where the recipe management would not recover correct from an error
 
