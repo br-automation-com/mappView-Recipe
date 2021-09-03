@@ -634,7 +634,7 @@ PROGRAM _CYCLIC
 			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_LOAD_WITH_WARN) THEN
 				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, "warning recipe read/write/new, check PLC logbook for details", rec_state);
 			ELSIF (MpRecipeStatusID = mpRECIPE_WRN_NO_PV_FOUND) THEN
-				tmpWStr1 := "error recipe file contains no data ";
+				tmpWStr1 := "error recipe file contains no or corrupt data ";
 				brwcsconv(ADR(tmpWStr2), ADR(RecipeFullFileName), brwU8toUC);
 				brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
 				rec_state := CreateError(ADR(RECIPE), MpRecipeStatusID, tmpWStr1, rec_state);
@@ -1134,13 +1134,16 @@ PROGRAM _CYCLIC
 				MpRecipeXml_0.Save := FALSE;
 				MpRecipeXml_0.Load := FALSE;
 				
-				MpRecipeRegPar_0.Enable := FALSE;
-				FOR idx:=1 TO REC_VAR_NUM DO
-					MpRecipeRegPar_1[idx].Enable := FALSE;
-					IF(REC_VAR_LIST[idx] = '') THEN
-						EXIT;
-					END_IF
-				END_FOR;
+				// Only reset variable function blocks when not already initialized
+				IF NOT RECIPE.PAR.Initialized THEN
+					MpRecipeRegPar_0.Enable := FALSE;
+					FOR idx:=1 TO REC_VAR_NUM DO
+						MpRecipeRegPar_1[idx].Enable := FALSE;
+						IF(REC_VAR_LIST[idx] = '') THEN
+							EXIT;
+						END_IF
+					END_FOR;
+				END_IF
 				
 				// Reset error structure
 				brsmemset(ADR(RECIPE.ERR), 0, SIZEOF(RECIPE.ERR));
