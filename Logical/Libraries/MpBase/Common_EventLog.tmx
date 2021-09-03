@@ -3,7 +3,7 @@
   <header creationtool="B&amp;R Automation Studio" creationtoolversion="4.2" datatype="unknown" segtype="sentence" adminlang="en" srclang="en" o-tmf="TMX">
     <note>Do not change anything in this file, else the tmx-file will not be recognized as a valid system text anymore</note>
     <prop type="x-BR-TS:Namespace">BR/EventLog</prop>
-    <prop type="x-BR-TS:systemtextsig">N9UKcjBcpvT6Cylclo0mDDNWsBEjhHHkLXhyE/jTrbKovFH6RBVYiQIJITJq69YLXMpRlGpIPNZHsAn2VGoO4NI4fg73x03vsXkmj2cqAg/MJmVuTNXYjAljIfIPj1Y/PjaX/gsm/xPenucN019/kbnhohhN2gaYQtlTl743+JQ=</prop>
+    <prop type="x-BR-TS:systemtextsig">CDm74Yz0E8b3AXzGf/1LYtAI1VMlY4mPMmO+KDvTp2HvMRoDyaqgmJAXEggj2fKgU42gxgiG+RtcsgzDIlNs/tIVUZbWVvi/f49xqWbH4hAFrbb9w0hhvx07703YOKwkRfO6aQp7s5U3rdt/iDonr+XBy23gv0+Ho1ySI5mNiyg=</prop>
   </header>
   <body>
     <tu tuid="-1064239099">
@@ -238,6 +238,14 @@
         <seg>The configuration data ({2} : {3}) contains entries with invalid format</seg>
       </tuv>
     </tu>
+    <tu tuid="-1064303107">
+      <tuv xml:lang="de">
+        <seg>Der Selektor {2} konnte nicht auf {3} gesetzt werden</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>The selector {2} could not be set to {3}</seg>
+      </tuv>
+    </tu>
     <tu tuid="-1064303098">
       <tuv xml:lang="de">
         <seg>Ungültiges Datenformat ({2})</seg>
@@ -296,7 +304,7 @@
     </tu>
     <tu tuid="-1064303084">
       <tuv xml:lang="de">
-        <seg>Einheit {2} kann nicht in {3} umgrechnet werden</seg>
+        <seg>Einheit {2} kann nicht in {3} umgerechnet werden</seg>
       </tuv>
       <tuv xml:lang="en">
         <seg>Unit {2} is not convertible to {3}</seg>
@@ -308,6 +316,22 @@
       </tuv>
       <tuv xml:lang="en">
         <seg>Invalid Unit-definition {3:2}</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303079">
+      <tuv xml:lang="de">
+        <seg>Einheiten-Umrechnung {2} ungültig</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Unit-translation {2} is invalid</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303077">
+      <tuv xml:lang="de">
+        <seg>Variable {2} für Einheiten-Umrechnung nicht gefunden oder fehlerhaft</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Variable {2} for unit-translation not found or invalid</seg>
       </tuv>
     </tu>
     <tu tuid="-1064303060">
@@ -336,7 +360,7 @@
     </tu>
     <tu tuid="-2138044953">
       <tuv xml:lang="de">
-        <seg>Komponent {2} war bereits in {3} registriert und wurde in {4} neu-registriert</seg>
+        <seg>Komponente {2} war bereits in {3} registriert und wurde in {4} neu-registriert</seg>
       </tuv>
       <tuv xml:lang="en">
         <seg>Component {2} was already linked to {3} and is relinked to {4}</seg>
@@ -414,6 +438,22 @@
         <seg>Could not create component</seg>
       </tuv>
     </tu>
+    <tu tuid="-1064303616">
+      <tuv xml:lang="de">
+        <seg>Es wurde keine PV mit dem angegebenen Namen gefunden.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>No PV with the requested name was found.</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303615">
+      <tuv xml:lang="de">
+        <seg>Die gewünschte Referenz ist NULL.</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>The requested reference is NULL.</seg>
+      </tuv>
+    </tu>
     <tu tuid="-1064303614">
       <tuv xml:lang="de">
         <seg>Ungültige Konfiguration der Query {2} (in {3})</seg>
@@ -451,7 +491,7 @@
         <seg>Ungültige Query-Update PV {2}</seg>
       </tuv>
       <tuv xml:lang="en">
-        <seg>Invalid query-update-pV {2}</seg>
+        <seg>Invalid Query-Update PV {2}</seg>
       </tuv>
     </tu>
     <tu tuid="-1064239102">
@@ -464,10 +504,10 @@
     </tu>
     <tu tuid="-1064239101">
       <tuv xml:lang="de">
-        <seg>MpLink connection not allowed</seg>
+        <seg>MpLink-Verbindung nicht erlaubt</seg>
       </tuv>
       <tuv xml:lang="en">
-        <seg>MpLink-Verbindung nicht erlaubt</seg>
+        <seg>MpLink connection not allowed</seg>
       </tuv>
     </tu>
     <tu tuid="-1064239100">
@@ -488,7 +528,7 @@
     </tu>
     <tu tuid="-1064239097">
       <tuv xml:lang="de">
-        <seg>Parameters-Struktur ist ein Null-Zeiger</seg>
+        <seg>Parameter-Struktur ist ein Null-Zeiger</seg>
       </tuv>
       <tuv xml:lang="en">
         <seg>Parameters structure is a null pointer</seg>
@@ -524,6 +564,38 @@
       </tuv>
       <tuv xml:lang="en">
         <seg>Warning loading configuration</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-2138045423">
+      <tuv xml:lang="de">
+        <seg>Eingegebener Taskname "{2}" ist zu lang und wurde gekürzt: "{3}"</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Entered task name "{2}" is too long and was truncated: "{3}"</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303598">
+      <tuv xml:lang="de">
+        <seg>Fehler beim Lesen des Passworts ({2}) aus der Konfiguration (Interner Fehler: {1})</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Error reading password ({2}) from configuration (Internal Error: {1})</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303597">
+      <tuv xml:lang="de">
+        <seg>Passwort ist ungültig</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Password is invalid</seg>
+      </tuv>
+    </tu>
+    <tu tuid="-1064303596">
+      <tuv xml:lang="de">
+        <seg>Es konnte nicht genügend Speicher allokiert werden</seg>
+      </tuv>
+      <tuv xml:lang="en">
+        <seg>Failed to allocated sufficient memory</seg>
       </tuv>
     </tu>
   </body>

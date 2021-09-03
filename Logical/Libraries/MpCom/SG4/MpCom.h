@@ -1,6 +1,6 @@
 /* Automation Studio generated header file */
 /* Do not edit ! */
-/* MpCom 5.07.1 */
+/* MpCom 5.15.0 */
 
 #ifndef _MPCOM_
 #define _MPCOM_
@@ -9,7 +9,7 @@ extern "C"
 {
 #endif
 #ifndef _MpCom_VERSION
-#define _MpCom_VERSION 5.07.1
+#define _MpCom_VERSION 5.15.0
 #endif
 
 #include <bur/plctypes.h>
@@ -17,17 +17,19 @@ extern "C"
 #ifndef _BUR_PUBLIC
 #define _BUR_PUBLIC
 #endif
-#ifdef _SG4
+#ifdef _SG3
 		#include "MpBase.h"
 #endif
 
-#ifdef _SG3
+#ifdef _SG4
 		#include "MpBase.h"
 #endif
 
 #ifdef _SGC
 		#include "MpBase.h"
 #endif
+
+
 
 /* Datatypes and datatypes of function blocks */
 typedef enum MpComConfigScopeEnum
