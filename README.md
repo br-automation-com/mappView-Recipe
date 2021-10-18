@@ -24,7 +24,6 @@ Recommended task class is #8 with a 10ms cycle time.
 ## Revision History
 
 #### Version 1.4 (18.10.2021)
-Version 1.4 (18.10.2021)
 - Added error message when recipe name is missing from unicode recipe
 - Dont reset error when returning to wait state
 
