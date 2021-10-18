@@ -601,7 +601,16 @@ PROGRAM _CYCLIC
 				END_IF
 				// Continue reading recipe names
 				IF(RECIPE.CMD.Init) THEN
-					InsertRecName(ADR(RECIPE), RecipeName, RECIPE.PAR.RecipeID);
+					// Make sure re
+					IF(RecipeName <> "") THEN
+						InsertRecName(ADR(RECIPE), RecipeName, RECIPE.PAR.RecipeID);
+					ELSE
+						tmpWStr1 := "error recipe name is missing from unicode file ";
+						brwcsconv(ADR(tmpWStr2), ADR(RecipeFullFileName), brwU8toUC);
+						brwcscat(ADR(tmpWStr1), ADR(tmpWStr2));
+						rec_state := CreateError(ADR(RECIPE), ERR_REC_VAR_NAME_MISSING, tmpWStr1, rec_state);
+					END_IF
+					RecipeName := "";
 					rec_state := REC_READ_DIR_2;
 					RETURN;
 				END_IF
