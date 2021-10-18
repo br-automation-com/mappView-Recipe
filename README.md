@@ -23,7 +23,8 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 1.3 (03.09.2021)
-- Update project to Automation Studio 4.9 and mapp 5.15
-- Fixed an issue where the recipe management would not recover correct from an error
+#### Version 1.4 (18.10.2021)
+Version 1.4 (18.10.2021)
+- Added error message when recipe name is missing from unicode recipe
+- Dont reset error when returning to wait state
 
