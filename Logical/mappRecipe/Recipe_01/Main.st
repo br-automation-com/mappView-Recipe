@@ -637,6 +637,11 @@ PROGRAM _CYCLIC
 				END_IF
 				// Finish save recipe 
 				IF(RECIPE.CMD.Save) THEN
+					// Add recipe to list if it is new
+					IF(FindRecName(ADR(RECIPE), RECIPE.PAR.RecipeName) = REC_DOES_NOT_EXIST) THEN
+						InsertRecName(ADR(RECIPE), RecipeName, RECIPE.PAR.RecipeID);
+						RECIPE.VIS[RECIPE.PAR.VisuSlotID].RecipeSelect := RecipeName;
+					END_IF
 					tmpWStr1 := "saved recipe";
 					RECIPE.CMD.Save	:= FALSE;
 				END_IF

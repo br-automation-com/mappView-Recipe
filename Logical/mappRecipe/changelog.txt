@@ -1,4 +1,5 @@
-Next Version
+Version 1.5 (27.01.2022)
+- Add recipe to list after save command when it does not exist
 - Fixed typo in memory allocation status check
 
 Version 1.4 (18.10.2021)
