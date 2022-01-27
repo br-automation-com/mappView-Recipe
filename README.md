@@ -23,7 +23,7 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-#### Version 1.4 (18.10.2021)
-- Added error message when recipe name is missing from unicode recipe
-- Dont reset error when returning to wait state
+### Version 1.5 (27.01.2022) 
+- Add recipe to list after save command when it does not exist 
+- Fixed typo in memory allocation status check 
 
