@@ -12,7 +12,7 @@ VAR CONSTANT
 	REC_DEVICE : STRING[80] := 'RECIPE_DEVICE'; (*Device name for the recipe data defined under File Devices in the CPU configuration*)
 	REC_DIRECTORY : STRING[80] := 'Recipe_01'; (*Directory where the recipes are stored*)
 	REC_THIS_TASK : STRING[40] := 'Recipe_01'; (*Name of this task and the global variables structure*)
-	REC_REC_NUM : USINT := 100; (*Maximum number of recipes*)
+	REC_REC_NUM : USINT := 100; (*Highest index for recipe arrays (Maximum number of recipes + 1)*)
 	REC_VAR_NUM : USINT := 10; (*Maximum number of variables that can be registered*)
 	REC_NAME_LENGTH : USINT := 40; (*Maximum length for a recipe name*)
 	REC_UPLOAD_DOWNLOAD_SIZE : UDINT := 100000; (*Maximum size of memory allocated for uploading and downloading files*)

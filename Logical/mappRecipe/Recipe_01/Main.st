@@ -721,9 +721,14 @@ PROGRAM _CYCLIC
 			// ---------------------------------------------------------------------------------------- 		
 			// OK																																				
 			IF (FRename.status = OK) THEN
-				// Remove name from recipe list	and add it again										
-				brsmemmove(ADR(RECIPE.DAT.RecipeNames[RecipeIndex]),ADR(RECIPE.DAT.RecipeNames[RecipeIndex+1]), (RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeNames[0]));
-				brsmemmove(ADR(RECIPE.DAT.RecipeIDs[RecipeIndex]),ADR(RECIPE.DAT.RecipeIDs[RecipeIndex+1]), (RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeIDs[0]));
+				// Remove name from recipe list	and add it again, make sure entry is not the last in the list
+				IF(RecipeIndex < REC_REC_NUM) THEN
+					brsmemmove(ADR(RECIPE.DAT.RecipeNames[RecipeIndex]),ADR(RECIPE.DAT.RecipeNames[RecipeIndex+1]), (REC_REC_NUM-RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeNames[0]));
+					brsmemmove(ADR(RECIPE.DAT.RecipeIDs[RecipeIndex]),ADR(RECIPE.DAT.RecipeIDs[RecipeIndex+1]), (REC_REC_NUM-RECIPE.DAT.RecipeNum) * SIZEOF(RECIPE.DAT.RecipeIDs[0]));
+				ELSE
+					RECIPE.DAT.RecipeNames[RecipeIndex] := "";
+					RECIPE.DAT.RecipeIDs[RecipeIndex] := '';
+				END_IF
 				RECIPE.DAT.RecipeNum := RECIPE.DAT.RecipeNum - 1;
 				
 				// Use the same name for unicode
