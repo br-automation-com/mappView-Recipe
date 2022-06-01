@@ -23,7 +23,6 @@ Recommended task class is #8 with a 10ms cycle time.
 <a name="Revision-History"></a>
 ## Revision History
 
-### Version 1.5 (27.01.2022) 
-- Add recipe to list after save command when it does not exist 
-- Fixed typo in memory allocation status check 
+### Version 1.6 (30.05.2022) 
+- Fixed rename command can cause memory violation and crash PLC 
 
