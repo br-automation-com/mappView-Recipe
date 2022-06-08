@@ -1,0 +1,1208 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.3">
+    
+    
+      
+        <title>Wiki - mappRecipe sample</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.4a0965b7.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#ffa724">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="orange" data-md-color-accent="orange">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#description" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="mappRecipe sample" class="md-header__button md-logo" aria-label="mappRecipe sample" data-md-component="logo">
+      
+  <img src="../images/bur.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            mappRecipe sample
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Wiki
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/br-automation-com/mappView-Recipe" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="mappRecipe sample" class="md-nav__button md-logo" aria-label="mappRecipe sample" data-md-component="logo">
+      
+  <img src="../images/bur.png" alt="logo">
+
+    </a>
+    mappRecipe sample
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/br-automation-com/mappView-Recipe" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub Repo
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Wiki
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Wiki
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-configuration" class="md-nav__link">
+    Pre-Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    Error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    Revision History
+  </a>
+  
+    <nav class="md-nav" aria-label="Revision History">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-16-30052022" class="md-nav__link">
+    Version 1.6 (30.05.2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-15-27012022" class="md-nav__link">
+    Version 1.5 (27.01.2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-14-18102021" class="md-nav__link">
+    Version 1.4 (18.10.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-13-03092021" class="md-nav__link">
+    Version 1.3 (03.09.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-12-15042021" class="md-nav__link">
+    Version 1.2 (15.04.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-11-01042021" class="md-nav__link">
+    Version 1.1 (01.04.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-10-05022021" class="md-nav__link">
+    Version 1.0 (05.02.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-091" class="md-nav__link">
+    Version 0.91
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-08" class="md-nav__link">
+    Version 0.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-07" class="md-nav__link">
+    Version 0.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-06" class="md-nav__link">
+    Version 0.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-05" class="md-nav__link">
+    Version 0.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-04" class="md-nav__link">
+    Version 0.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-03" class="md-nav__link">
+    Version 0.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-02" class="md-nav__link">
+    Version 0.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-01" class="md-nav__link">
+    Version 0.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pre-configuration" class="md-nav__link">
+    Pre-Configuration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error" class="md-nav__link">
+    Error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    Limitations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#revision-history" class="md-nav__link">
+    Revision History
+  </a>
+  
+    <nav class="md-nav" aria-label="Revision History">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#version-16-30052022" class="md-nav__link">
+    Version 1.6 (30.05.2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-15-27012022" class="md-nav__link">
+    Version 1.5 (27.01.2022)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-14-18102021" class="md-nav__link">
+    Version 1.4 (18.10.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-13-03092021" class="md-nav__link">
+    Version 1.3 (03.09.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-12-15042021" class="md-nav__link">
+    Version 1.2 (15.04.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-11-01042021" class="md-nav__link">
+    Version 1.1 (01.04.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-10-05022021" class="md-nav__link">
+    Version 1.0 (05.02.2021)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-091" class="md-nav__link">
+    Version 0.91
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-08" class="md-nav__link">
+    Version 0.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-07" class="md-nav__link">
+    Version 0.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-06" class="md-nav__link">
+    Version 0.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-05" class="md-nav__link">
+    Version 0.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-04" class="md-nav__link">
+    Version 0.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-03" class="md-nav__link">
+    Version 0.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-02" class="md-nav__link">
+    Version 0.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#version-01" class="md-nav__link">
+    Version 0.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/br-automation-com/mappView-Recipe/edit/master/docs/wiki.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+  <h1>Wiki</h1>
+
+<ul>
+<li><a href="#Description">Description</a></li>
+<li><a href="#Pre-Configuration">Pre Configuration</a></li>
+<li><a href="#Performance">Performance</a></li>
+<li><a href="#Errors">Error numbers</a></li>
+<li><a href="#Limitations">Limitations</a></li>
+<li><a href="#Revision-History">Revision History</a></li>
+</ul>
+<p><a name="Description"></a></p>
+<h2 id="description">Description</h2>
+<p>The sample consists of two main components. The sample page is used to operate the recipe management. The task Recipe_01 drives the recipe management. Ideally this task should not be changed to make future updates easier. All additional code should be added to 'YourTask'. The following functions are currently supported.</p>
+<ul>
+<li>Load and Save recipes</li>
+<li>View recipes</li>
+<li>Create new recipes</li>
+<li>Delete recipes</li>
+<li>Rename recipes</li>
+<li>Download and upload recipes</li>
+</ul>
+<p>Recipes can be downloaded directly from the web client. To support this function the recipes must be loaded into memory. A buffer of the size REC_UPLOAD_DOWNLOAD_SIZE is used to hold the data into the memory. If the recipes exceed REC_UPLOAD_DOWNLOAD_SIZE the constant must be increased. Recipe upload is supported for ASCII recipe mode (REC_USE_UNICODE=false).</p>
+<p>Up to 3 web clients can connect at the same time. While the task itself can only execute one command at a time the commands are executed so fast that this should not be an issue. The init command may take longer but the response data is distributed to all sessions. The task uses a variable structure to communicate with the outside world that can also be used to interact with other tasks. The structure <em>Recipe_01</em> looks as follows:</p>
+<table>
+  <tr>
+    <td width=100>Level 1</td>
+    <td>Level 2</td>
+    <td>Level Description</td>
+  </tr>
+  <tr ">
+    <th>CMD</th>
+    <td colspan="3">Used to trigger commands like load, save, delete, ... A command is triggered by setting it to true, when the command is finished the task will reset the command. This indicates that the command is finished. Do not change any parameters or set another command until the previous command is finished.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>Init</td>
+   <td colspan="3">Initializes the recipe management and reads the names of all recipes.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>New</td>
+   <td colspan="3">Create a new recipe, triggers an error message if the recipe name already exists.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>Load</td>
+   <td colspan="3">Loads the recipe data.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>Save</td>
+   <td colspan="3">Saves the recipe data.</td>
+  </tr>
+   <td></td>
+   <td>View</td>
+   <td colspan="3">View selected recipe.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>Rename</td>
+   <td colspan="3">Renames the selected recipe.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>Delete</td>
+   <td colspan="3">Deletes the selected recipe.</td>
+  </tr>
+   <td></td>
+   <td>Download</td>
+   <td colspan="3">Download selected recipe.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>Upload</td>
+   <td colspan="3">Upload a recipe via web browser to the taret.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>ErrorReset</td>
+   <td colspan="3">Resets pending errors.</td>
+  </tr>
+    <th> PAR </th>
+    <td colspan="3">Parameters like recipe name, file path, ...</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>RecipeName</td>
+   <td colspan="3">The name of the recipe used with the current command.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeNameNew</td>
+   <td colspan="3">New name used with the command rename.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>RecipeID</td>
+   <td colspan="3">File name of the recipe. With standard strings this equal the recipe name. Increasing numbers are used for Unicode recipe names. The recipe name is then stored as Unicode inside the recipe itself.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>Initialized</td>
+   <td colspan="3">Shows that the recipe management was initialized correct.</td>
+  </tr>
+   <td></td>
+   <td>VisuSlotID</td>
+   <td colspan="3">This is the session ID for the current command. This is used to identify where to send response messages.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>VisuEnableCommand</td>
+   <td colspan="3">Enable or disable commands when number of recipes is 0 or command is running.</td>
+  </tr>
+  <tr>
+    <th> DAT </th>
+    <td colspan="3">Recipe lists as well as status information.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeNames</td>
+   <td colspan="3">List with all recipe names.</td>
+  </tr>
+   <td></td>
+   <td>RecipeIDs</td>
+   <td colspan="3">File names for the corresponding recipe name.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeNum</td>
+   <td colspan="3">Number of recipes in the list.</td>
+  </tr>
+  <tr>
+    <th> VIS </th>
+    <td colspan="3">Data specific for the visualization. The structure is an array, one for each client session.</td>
+  <tr>
+   <td></td>
+   <td>RecipeNames</td>
+   <td colspan="3">List with all recipes formatted as data provider for the mappView listbox.</td>
+  </tr>
+  <tr>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeNum</td>
+   <td colspan="3">Number of visible recipes in the list. Depending on the filter this number can be lower than the total number of recipes stored under DAT.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeFilter</td>
+   <td colspan="3">Only show recipes that contain this string pattern.</td>
+  </tr>
+   <tr>
+   <td></td>
+   <td>RecipeSelect</td>
+   <td colspan="3">Used to select the recipe name after command new or rename.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>DownloadFileUrl</td>
+   <td colspan="3">Url containing the file name that is downloaded.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>UploadOverwriteRequest</td>
+   <td colspan="3">Show message box to overwrite file.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>UploadOverwriteResponse</td>
+   <td colspan="3">Response from message box overwrite file.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>ReloadUpload</td>
+   <td colspan="3">Reload upload button.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>RecipeDoubleClick</td>
+   <td colspan="3">Helper variable to detect a double click on a record. When a double click is detected, the recipe is opened.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>ViewFilePath</td>
+   <td colspan="3">File path used for the web widget that shows the file content.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>ViewFile</td>
+   <td colspan="3">Trigger to open the fly out window and view the file content.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>ShowMessageBoxError</td>
+   <td colspan="3">Show a message box when command was not successful.</td>
+  </tr>
+   <tr>
+    <th> ERR </th>
+    <td colspan="3">Information about errors.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>State</td>
+   <td colspan="3">State where the error occurred.</td>
+  </tr>
+  <tr>
+   <td></td>
+   <td>Text</td>
+   <td colspan="3">Error text.</td>
+  </tr>
+   <tr>
+   <th>StatusText</td>
+   <td colspan="3">Shows the result for the last command.</td>
+  </tr>
+   <tr>
+    <th>StatusNo</th>
+    <td colspan="3">Shows the status as number</td>
+  </tr>
+</table>
+
+<p><a name="Pre-Configuration"></a></p>
+<h2 id="pre-configuration">Pre-Configuration</h2>
+<p>The task communicates with the outside world via the global structure 'Recipe_01'. If more than one recipe management is needed the complete package 'mappRecipe' should be duplicated. It is important that the new task name and new global structure use the same name. </p>
+<p>After importing the sample go to the package 'mappRecipe' and edit the file 'RecVariables.var'. The variable array 'REC_VAR_LIST' contains the name of the variables that contain the recipe data. The default variable has a few sample values. After importing the task these can be replaced with "real" variables that should be saved. The variables can be standard type but also arrays or structures.</p>
+<p>The following constants can be adjusted if necessary.</p>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Default</th>
+<th>Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REC_USE_UNICODE</td>
+<td>TRUE</td>
+<td>When set the to false the recipe name equals the file name. Use this setting for better performance when no special characters are needed. When set to true an increasing number is used for the file name instead. The recipe name is then stored as Unicode inside the recipe itself. Execute a clean configuration and rebuilt the project after changing this value. When set to to TRUE recipe upload is not supported.</td>
+</tr>
+<tr>
+<td>REC_SORT_NUMERIC</td>
+<td>FALSE</td>
+<td>Sort recipe names as numeric values instead of alphabetic.</td>
+</tr>
+<tr>
+<td>REC_RECIPE_TYPE</td>
+<td>typeCSV</td>
+<td>Select typeCSV for recipes in CSV file format or select typeXML for XML format. Execute a clean configuration and rebuilt the project after changing this value.</td>
+</tr>
+<tr>
+<td>REC_MPLINK</td>
+<td>gRecipeCsv_01</td>
+<td>mappRecipe link name from configuration view. Use gRecipeCsv_01 for CSV and gRecipeXml_01 for XML in this demo.</td>
+</tr>
+<tr>
+<td>REC_DEVICE</td>
+<td>RECIPE_DEVICE</td>
+<td>Device name for the recipe data defined under File Devices in the CPU configuration.</td>
+</tr>
+<tr>
+<td>REC_DIRECTORY</td>
+<td>Recipe_01</td>
+<td>Directory where the recipes are stored.</td>
+</tr>
+<tr>
+<td>REC_THIS_TASK</td>
+<td>Recipe_01</td>
+<td>Name of this task and the global variable's structure.</td>
+</tr>
+<tr>
+<td>REC_REC_NUM</td>
+<td>100</td>
+<td>Maximum number of recipes.</td>
+</tr>
+<tr>
+<td>REC_VAR_NUM</td>
+<td>10</td>
+<td>Maximum number of variables that can be registered.</td>
+</tr>
+<tr>
+<td>REC_NAME_LENGTH</td>
+<td>40</td>
+<td>Maximum length for a recipe name.</td>
+</tr>
+<tr>
+<td>REC_UPLOAD_DOWNLOAD_SIZE</td>
+<td>100000</td>
+<td>Maximum size of files that can be uploaded or downloaded</td>
+</tr>
+<tr>
+<td>REC_VIS_LENGTH</td>
+<td>120</td>
+<td>Make this REC_NAME_LENGTH x 3.</td>
+</tr>
+<tr>
+<td>REC_MAX_CLIENTS_ID</td>
+<td>2</td>
+<td>Maximum number of concurrent web client connections. Do not change this number.</td>
+</tr>
+<tr>
+<td>REC_VIEW_FILTER</td>
+<td>csv, xml</td>
+<td>File extensions that can be used with the view command. The filter is case sensitive.</td>
+</tr>
+<tr>
+<td>REC_VAR_LIST</td>
+<td></td>
+<td>List of variables to be included in a recipe.</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Performance"></a></p>
+<h2 id="performance">Performance</h2>
+<p>When calling the init command the task needs some time to generate the list of recipe names. On a X20CP1583 running the task in a 10ms task class the init command needs about 20ms per recipe plus 150ms. So for 100 recipes the task needs 2.15 seconds to read all recipe names when using standard strings.</p>
+<p>When using Unicode strings the task needs 70ms per recipe name plus 200ms. So for 100 recipes the task needs 7.20 seconds to read all recipe names when using Unicode strings.</p>
+<p><a name="Errors"></a></p>
+<h2 id="error">Error</h2>
+<p>The task generates the following list of error messages. All other error numbers are generated from included libraries that can be found in the Automation Studio help.</p>
+<table>
+<thead>
+<tr>
+<th>No</th>
+<th>Constant</th>
+<th>Text</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>50010</td>
+<td>ERR_REC_TOO_MANY_CLIENTS</td>
+<td>More than 3 clients try to connect to user management</td>
+</tr>
+<tr>
+<td>50100</td>
+<td>ERR_REC_NAME_EMPTY</td>
+<td>Recipe name is empty</td>
+</tr>
+<tr>
+<td>50101</td>
+<td>ERR_REC_NAME_EXISTS</td>
+<td>Recipe name already exists</td>
+</tr>
+<tr>
+<td>50102</td>
+<td>ERR_REC_NAME_LOST</td>
+<td>Recipe name was not found</td>
+</tr>
+<tr>
+<td>50103</td>
+<td>ERR_REC_NAME_LENGTH</td>
+<td>One or more recipe names exceeds maximum length</td>
+</tr>
+<tr>
+<td>50110</td>
+<td>ERR_REC_DEV_NAME_EMPTY</td>
+<td>Device name is empty</td>
+</tr>
+<tr>
+<td>50120</td>
+<td>ERR_REC_VAR_NAME_EMPTY</td>
+<td>Variable name is empty</td>
+</tr>
+<tr>
+<td>50130</td>
+<td>ERR_REC_NOT_INITIALIZED</td>
+<td>Recipe management is not initialized</td>
+</tr>
+<tr>
+<td>50140</td>
+<td>ERR_REC_MAX_NUM</td>
+<td>Maximum number of recipes reached</td>
+</tr>
+<tr>
+<td>50150</td>
+<td>ERR_REC_TASK_NAME</td>
+<td>Task name is incorrect. Make sure task name and global variable structure share the same name and that the string "this" is correct in the init task.</td>
+</tr>
+<tr>
+<td>50300</td>
+<td>ERR_MEM_ALLOC</td>
+<td>Memory allocation for file upload and download failed</td>
+</tr>
+<tr>
+<td>50310</td>
+<td>ERR_MEM_DOWNLOAD</td>
+<td>Size of download file exceeds maximum</td>
+</tr>
+<tr>
+<td>50320</td>
+<td>ERR_TIMEOUT_DOWNLOAD</td>
+<td>Download response timed out</td>
+</tr>
+<tr>
+<td>50330</td>
+<td>ERR_DIR_DOWNLOAD</td>
+<td>Directories cannot be downloaded</td>
+</tr>
+<tr>
+<td>50400</td>
+<td>ERR_SIZE_NAME_UPLOAD</td>
+<td>Cannot find filename in upload response</td>
+</tr>
+<tr>
+<td>50401</td>
+<td>ERR_POS_NAME_UPLOAD</td>
+<td>Cannot determine end of filename in upload response</td>
+</tr>
+<tr>
+<td>50402</td>
+<td>ERR_LEN_NAME_UPLOAD</td>
+<td>Filename is too long in upload response</td>
+</tr>
+<tr>
+<td>50403</td>
+<td>ERR_POS_DATA_UPLOAD</td>
+<td>Cannot find data in upload response</td>
+</tr>
+<tr>
+<td>50404</td>
+<td>ERR_SIZE_DATA_UPLOAD</td>
+<td>Cannot determine end of data in upload response</td>
+</tr>
+<tr>
+<td>50410</td>
+<td>ERR_MEM_UPLOAD</td>
+<td>Size of upload file exceeds maximum size</td>
+</tr>
+<tr>
+<td>50420</td>
+<td>ERR_UNICODE_UPLOAD</td>
+<td>Upload is not supported when Unicode is used</td>
+</tr>
+</tbody>
+</table>
+<p><a name="Limitations"></a></p>
+<h2 id="limitations">Limitations</h2>
+<ul>
+<li>Viewing a recipe only works for CSV files.</li>
+<li>Downloading and uploading currently does not work for Unicode recipes.</li>
+</ul>
+<p><a name="Revision-History"></a></p>
+<h2 id="revision-history">Revision History</h2>
+<h4 id="version-16-30052022">Version 1.6 (30.05.2022)</h4>
+<ul>
+<li>Fixed rename command can cause memory violation and crash PLC</li>
+</ul>
+<h4 id="version-15-27012022">Version 1.5 (27.01.2022)</h4>
+<ul>
+<li>Add recipe to list after save command when it does not exist </li>
+<li>Fixed typo in memory allocation status check </li>
+</ul>
+<h4 id="version-14-18102021">Version 1.4 (18.10.2021)</h4>
+<p>Version 1.4 (18.10.2021)
+- Added error message when recipe name is missing from Unicode recipe
+- Don't reset error when returning to wait state</p>
+<h4 id="version-13-03092021">Version 1.3 (03.09.2021)</h4>
+<ul>
+<li>Update project to Automation Studio 4.9 and mapp 5.15</li>
+<li>Fixed an issue where the recipe management would not recover correct from an error</li>
+</ul>
+<h4 id="version-12-15042021">Version 1.2 (15.04.2021)</h4>
+<ul>
+<li>Fixed PLC crash when REC_VAR_NUM is 1</li>
+</ul>
+<h4 id="version-11-01042021">Version 1.1 (01.04.2021)</h4>
+<ul>
+<li>Fixed upload file name can exceed REC_ITEM_LENGTH</li>
+</ul>
+<h4 id="version-10-05022021">Version 1.0 (05.02.2021)</h4>
+<ul>
+<li>Fixed memory violation when file exceeds download buffer size</li>
+<li>Reset error in wait state</li>
+<li>Errors in the wait state report the wrong trigger state</li>
+</ul>
+<h4 id="version-091">Version 0.91</h4>
+<ul>
+<li>Wrong MpLink name now generates an error</li>
+<li>Moved status text up to main strutcure</li>
+<li>Moved error no up to main structure and renamed it to StatusNo</li>
+<li>Better recovering from errors</li>
+</ul>
+<h4 id="version-08">Version 0.8</h4>
+<ul>
+<li>Changed some parameters to constants</li>
+<li>Simplified configuration</li>
+<li>Added better error messages</li>
+<li>Added the possibility to define multiple variables</li>
+</ul>
+<h4 id="version-07">Version 0.7</h4>
+<ul>
+<li>Fixed recipe view does not show correct data on double click or command view </li>
+<li>Fixed ReplaceString function call </li>
+</ul>
+<h4 id="version-06">Version 0.6</h4>
+<ul>
+<li>Option to sort recipe names as numeric values instead of alphabetic</li>
+<li>Code cleanup</li>
+<li>Renamed web controls to avoid conflicts with other samples</li>
+<li>Fixed download not working when downloading the same file again</li>
+<li>Fixed upload not working with large files &gt; 1 MB</li>
+</ul>
+<h4 id="version-05">Version 0.5</h4>
+<ul>
+<li>Added support for recipe upload over mappView </li>
+<li>Fixed renaming recipes in ASCII mode </li>
+</ul>
+<h4 id="version-04">Version 0.4</h4>
+<ul>
+<li>Added support for recipe download over mappView</li>
+<li>Removed view file status message</li>
+<li>Code cleanup</li>
+</ul>
+<h4 id="version-03">Version 0.3</h4>
+<ul>
+<li>Added categories to mapp function blocks to separate recipe data</li>
+<li>Added function to view files by double click or command</li>
+<li>Removed obsolete constants</li>
+</ul>
+<h4 id="version-02">Version 0.2</h4>
+<ul>
+<li>Added message box before saving or deleting a recipe </li>
+<li>Fixed filter compare too short </li>
+<li>Added exit function </li>
+<li>Code cleanup</li>
+</ul>
+<h4 id="version-01">Version 0.1</h4>
+<p>First public release</p>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f758a944.min.js"></script>
+      
+    
+  </body>
+</html>
