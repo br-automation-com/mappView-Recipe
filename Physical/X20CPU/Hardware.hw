@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?AutomationStudio Version=4.9.4.92 FileVersion="4.9"?>
+<?AutomationStudio Version=4.9.5.36 FileVersion="4.9"?>
 <Hardware xmlns="http://br-automation.co.at/AS/Hardware">
   <Module Name="X20CP1583" Type="X20CP1583" Version="1.8.1.0">
     <Connector Name="IF2">

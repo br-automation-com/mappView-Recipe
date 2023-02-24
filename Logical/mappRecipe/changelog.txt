@@ -1,3 +1,6 @@
+Version 1.7 (24.02.2023)
+- Removed obsolete widget for recipe directory
+
 Version 1.6 (30.05.2022)
 - Fixed rename command can cause memory violation and crash PLC
 

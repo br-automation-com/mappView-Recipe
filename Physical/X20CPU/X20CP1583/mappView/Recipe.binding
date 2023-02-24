@@ -2,14 +2,17 @@
 <BindingsSet xmlns="http://www.br-automation.com/iat2015/binding/engineering/v2" xmlns:be="http://www.br-automation.com/iat2015/bindingListEmbedded/engineering/v2" xmlns:bt="http://www.br-automation.com/iat2015/bindingListTypes/engineering/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Recipe_binding">
 	<Bindings>
 		<Binding mode="twoWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusText" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
+		</Binding>
+		<Binding mode="oneWay">
+			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusNo" attribute="value" />
+			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecStatusNo" attribute="value" />
+		</Binding>
+		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.ERR.Text" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecErrorText" attribute="value" />
-		</Binding>
-				
-		<Binding mode="twoWay">
-			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeDirectory" attribute="value" />
-			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecPath" attribute="value" />
-		</Binding>
+		</Binding>				
 		<Binding mode="twoWay">
 			<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.PAR.RecipeID" attribute="value" />
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecID" attribute="value" />
@@ -124,13 +127,5 @@
 			</Source>
 			<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="WebDownloadRecipe" attribute="path" />
 		</Binding>
-	<Binding mode="twoWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusText" attribute="value" />
-<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="txtRecStatus" attribute="value" />
-</Binding>
-<Binding mode="oneWay">
-<Source xsi:type="opcUa" refId="::AsGlobalPV:Recipe_01.StatusNo" attribute="value" />
-<Target xsi:type="brease" contentRefId="contentRecipe" widgetRefId="numRecStatusNo" attribute="value" />
-</Binding>
-</Bindings>
+	</Bindings>
 </BindingsSet>
